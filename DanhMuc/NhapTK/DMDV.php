@@ -344,39 +344,7 @@
 						</li>						
 					</ul>
 				</li>
-				<li >
-					<a href="tables-main.html">
-						<i class="entypo-window"></i>
-						<span class="title"><strong>Báo cáo kê khai theo TT 89</strong></span>
-					</a>
-					<ul>
-						<li>
-							<a  href="/Thoaitonghop/ThoaiCkQLSDTSCSHDSNlc.php">	<i class="entypo-book-open"></i>						
-								<span class='title'>Công khai quản lý, sử dụng TSLV, CSHĐSN</span>
-							</a>	
-						</li>
-						<li>
-							<a  href="/Thoaitonghop/ThoaiCkKHMSTSNNlc.php">	<i class="entypo-book-open"></i>						
-								<span class='title'>Công khai kế hoạch mua sắm tài sản nhà nước</span>
-							</a>	
-						</li>
-						<li>
-							<a  href="/Thoaitonghop/ThoaiCkKQTHMSTSNNlc.php">	<i class="entypo-book-open"></i>						
-								<span class='title'>Công khai kết quả mua sắm tài sản nhà nước</span>
-							</a>	
-						</li>
-						<li>
-							<a  href="/Thoaitonghop/ThoaiCkSDPTDLlc.php">	<i class="entypo-book-open"></i>						
-								<span class='title'>Công khai quản lý, sử dụng phương tiện đi lại và tài sản khác</span>
-							</a>	
-						</li>
-						<li>
-							<a  href="/Thoaitonghop/ThoaiCkTHXLTSNN.php">	<i class="entypo-book-open"></i>						
-								<span class='title'>Công khai tình hình xử lý tài sản</span>
-							</a>	
-						</li>
-					</ul>
-				</li>
+				
 				<li>
 					<a href="tables-main.html">
 						<i class="entypo-window"></i>
