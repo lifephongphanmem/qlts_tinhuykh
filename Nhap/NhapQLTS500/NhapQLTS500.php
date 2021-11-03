@@ -824,7 +824,7 @@ if(mysqli_num_rows($kq)>0){
 								$sql="select mataisanqd32,tentaiqd32 from tbldanhsachqd32 Where chitiethinhthai Not like 'Nhà%' and chitiethinhthai Not like 'Đất%' and chitiethinhthai Not like 'Phương tiện %' and mataisanqd32 Like 'TS%'";
 								$sql1=mysqli_query($con,$sql);
 								echo"<div  class='col-sm-8'>";
-									echo"<select name='mataisan' class='form-control' id='mataisan'>";
+									echo"<select name='mataisan' class='form-control js-example-basic-single' id='mataisan'>";
 									echo"<option selected='selected' value=''>Chọn tên tài sản</option>";
 										while ($data=mysqli_fetch_row($sql1))
 								{

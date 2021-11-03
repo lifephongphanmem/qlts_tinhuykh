@@ -834,7 +834,7 @@ if(isset($_POST["luupb"]))
 			$sql="select mataisanqd32,tentaiqd32,phantramhaomon,phantram32,namsudung from tbldanhsachqd32 Where chitiethinhthai Not like 'Nhà%' and chitiethinhthai Not like 'Quyền sử dụng đất%' and chitiethinhthai Not like 'Đất%' and chitiethinhthai Not like 'Phương tiện%' and chitiethinhthai Not like 'Xe ô tô%' and chitiethinhthai Not like 'Vật kiến trúc%' and mataisanqd32 Like 'TS%' order BY tentaiqd32";
 			$sql1=mysqli_query($con,$sql);
 			echo"<div  class='col-sm-45'>";
-				echo"<select name='mataisanth' class='form-control' data-validate = 'required' id='mataisanth'>";
+				echo"<select name='mataisanth' class='form-control js-example-basic-single' data-validate = 'required' id='mataisanth'>";
 				echo"<option selected='selected' value=''>Chọn tên tài sản</option>";
 			while ($data=mysqli_fetch_row($sql1))
 			{

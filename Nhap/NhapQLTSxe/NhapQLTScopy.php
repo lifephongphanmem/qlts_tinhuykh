@@ -959,7 +959,7 @@ if(isset($_POST["luupb"]))
 			$sql="select mataisanqd32,tentaiqd32,phantramhaomon,phantram32,namsudung from tbldanhsachqd32 Where (hinhthaitaisan Like 'Xe ô tô%' or hinhthaitaisan Like 'Phương tiện vận tải khác (ngoài xe ô tô)%' or hinhthaitaisan Like 'Phương tiện vận tải%') and mataisanqd32 Like 'TS%'";
 			$sql1=mysqli_query($con,$sql);
 			echo"<div  class='col-sm-45'>";
-				echo"<select name='mataisanth' class='form-control' data-validate = 'required' id='mataisanth'>";
+				echo"<select name='mataisanth' class='form-control js-example-basic-single' data-validate = 'required' id='mataisanth'>";
 				echo"<option selected='selected' value=''>Chọn tên tài sản</option>";
 			while ($data=mysqli_fetch_row($sql1))
 			{
