@@ -166,8 +166,8 @@ if(isset($_POST['create'])){
 	$ttslv=0;$tcshcsn=0;$tlno=0;$tct=0;$tbt=0;$tblc=0;$tk=0;
 		$kq = "";
 		$dckv = "";
-		$dtkv = "";
-		$gtskt = "";
+		$dtkv = 0;
+		$gtskt = 0;
 	while($rowd = mysqli_fetch_array($queryd)){
 		$sqldht = "Select * From tblhientrang Where TTQLTS = " . $rowd['TTQLTS']." and ngaythang in (select max(ngaythang) from tblhientrang where TTQLTS = " . $rowd['TTQLTS']." and ngaythang <= '" . doingay($denngay) . "' )";
 		$querydht = mysqli_query($con,$sqldht);
