@@ -787,6 +787,8 @@ $(document).ready(function(){
 					$IDTS = IDTS();
 					$sqlhm = "Insert into tblhaomon(ngaythang,TTQLTS,namhaomon,phantram,sodu,sotien,madonvi,TTTS) values ('$ngaythang',$IDTS,$namhm,$phantramhm,$soduhm,$sohmnam,'$madvdc',$IDTS)";
 					$qrsqlhm = mysqli_query($con, $sqlhm);
+					$sqlht = "Insert into tblhientrang(ngaythang,TTQLTS,phanloai,soluong,madonvi,TTTS) values ('$ngaythang',$IDTS,'QLNN',1,'$madvdc',$IDTS)";
+					$qrsqlht = mysqli_query($con, $sqlht);
 					$sqlup = "Update tblqlts Set XOA = 'DC' Where TTQLTS = '$TTQLTS'";
 					$qrsqlup = mysqli_query($con, $sqlup);
 					$sqltg = "insert into tbltanggiam (ngaytanggiam,TTQLTS,lydotanggiam,soluong,tanggiam,madonvi)" .
