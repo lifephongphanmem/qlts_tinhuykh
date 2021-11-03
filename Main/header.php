@@ -72,7 +72,7 @@ else
 	<link rel="stylesheet" href="/assets/css/neon-forms.css">
 	<link rel="stylesheet" href="/assets/css/custom.css">	
 	<script src="/assets/js/jquery-1.11.0.min.js"></script>
-
+	<link rel="stylesheet" type="text/css" href="/assets/global/plugins/select2/select2.css"/>
 	<link rel="stylesheet" href="/assets/css/skins/facebook.css">
 
 	<script src="/assets/js/jsform.js"></script>

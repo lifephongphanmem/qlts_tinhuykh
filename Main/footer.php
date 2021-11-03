@@ -43,7 +43,12 @@
 	{
 
 	}
-</script>	
+</script>
+	<script>
+		$(document).ready(function() {
+			$('.js-example-basic-single').select2();
+		});
+	</script>
 <?php 	
 	require("connect.php");
 	$ma = explode('>',$madv); 

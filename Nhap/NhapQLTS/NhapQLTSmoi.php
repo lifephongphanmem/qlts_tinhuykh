@@ -828,7 +828,7 @@ if(isset($_POST["luupb"]))
 			$sql="select mataisanqd32,tentaiqd32,phantramhaomon,phantram32,namsudung from tbldanhsachqd32 Where chitiethinhthai Not like 'Nhà%' and chitiethinhthai Not like 'Quyền sử dụng đất%' and chitiethinhthai Not like 'Đất%' and chitiethinhthai Not like 'Phương tiện%' and chitiethinhthai Not like 'Xe ô tô%' and chitiethinhthai Not like 'Vật kiến trúc%' and mataisanqd32 Like 'TS%'";
 			$sql1=mysqli_query($con,$sql);
 			echo"<div  class='col-sm-45'>";
-				echo"<select name='mataisanth' class='form-control' data-validate = 'required' id='mataisanth'>";
+				echo"<select name='mataisanth' class='form-control js-example-basic-single' data-validate = 'required' id='mataisanth'>";
 				echo"<option selected='selected' value=''>Chọn tên tài sản</option>";
 			while ($data=mysqli_fetch_row($sql1)) {
 				$value = $data[0] . ">" . $data[2] . ">" . $data[3] . ">" . $data[4];
@@ -857,7 +857,7 @@ if(isset($_POST["luupb"]))
 			</div>
 			<label for="field-4" class="col-sm-15 control-label">Nước sản xuất<span style="padding-left:0px; color:red;">*</span>:</label>
 			<div class="col-sm-45">
-				<select name='NUOCSX'  class='form-control'>
+				<select name='NUOCSX'  class='form-control select2me'>
 				<option  value='Abkhazia'>Abkhazia</option>
 				<option  value='Afghanistan'>Afghanistan</option>
 				<option  value='Ai Cập'>Ai Cập</option>
