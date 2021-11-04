@@ -745,7 +745,9 @@ function ktthanhly($mats)
 		return true;
 }
 //
-$sql = "select TTQLTS,mataisan,tentaisan,tenchitiet,ngaynhap,namsanxuat,NUOCSX,ngaysudung,DTKV,DTXD,ngansach,nguonkhac,chitiethinhthai,sonamsd from tblqlts where madonvi = '$ab' and chitiethinhthai like 'Nhà%'";
+$sql = "select TTQLTS,mataisan,tentaisan,tenchitiet,ngaynhap,namsanxuat,NUOCSX,ngaysudung,DTKV,DTXD,ngansach,nguonkhac,tblqlts.chitiethinhthai,sonamsd ".
+	" from tblqlts inner join tbldanhsachqd32 on tblqlts.mataisan = tbldanhsachqd32.mataisanqd32".
+	" where madonvi = '$ab' and tbldanhsachqd32.hinhthaitaisan like 'Nhà%'";
 $kq = mysqli_query($con,$sql);
 $soluong =0;$ngnh="";$ngsd="";$mamt=""; $stt=0;     
 if(mysqli_num_rows($kq)>0){
