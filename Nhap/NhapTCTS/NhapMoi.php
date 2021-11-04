@@ -590,7 +590,7 @@ include("$_SERVER[DOCUMENT_ROOT]/Main/header.php"); ?>
 					$sql="select mataisanqd32,tentaiqd32,chitiethinhthai,dacdiemtaisan from tbldanhsachqd32 where mataisanqd32 like 'TS%'";
 					$sql1=mysqli_query($con,$sql);
 					echo"<div  class='col-sm-4'>";
-					echo"<select name='mataisan' class='form-control' data-validate = 'required' id='mataisan'>";
+					echo"<select name='mataisan' class='form-control js-example-basic-single' data-validate = 'required' id='mataisan'>";
 					echo"<option selected='selected' value=''>Chọn tên tài sản</option>";
 					while ($data=mysqli_fetch_row($sql1))
 					{
