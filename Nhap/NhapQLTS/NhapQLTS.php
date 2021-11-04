@@ -582,26 +582,20 @@ if(isset($_GET['id'])){
 	$key=explode(">",$tttc);
 	$sql = "select tblqlts.TTQLTS,tblqlts.mataisan,tblqlts.tentaisan,tblqlts.tenchitiet,tblqlts.ngaynhap,tblqlts.namsanxuat,tblqlts.NUOCSX,tblqlts.ngaysudung," .
 		"tblqlts.DTKV,tblqlts.DTXD,tblqlts.ngansach,tblqlts.nguonkhac,tblqlts.chitiethinhthai,tblqlts.noidung,tblqlts.DVT,tblqlts.GCTS,tblqlts.ttkhac" .
-		",tblqlts.phantram,tblqlts.phantram32,tblhaomon.namhaomon,tblhaomon.sodu,tblhaomon.sotien,tblhaomon.phantram,tblqlts.sohaomon,tblqlts.conlai,tblhaomon.TThaomon,tblqlts.theodoi" .
-		" from tblqlts inner join tblhaomon on tblqlts.TTQLTS = tblhaomon.TTTS" .
-		" where tblqlts.nguonkhac+tblqlts.ngansach <500000000 and  tblqlts.madonvi = '$ab' and tblqlts.chitiethinhthai <> 'Nhà' and" .
-		" tblqlts.chitiethinhthai not Like 'Phương tiện vận tải%' and tblqlts.chitiethinhthai not like 'Đất%' and tblqlts.chitiethinhthai not like 'Quyền sử dụng đất%' and tblqlts.chitiethinhthai not like 'Vật kiến trúc%' and tblqlts.chitiethinhthai not like 'Nhà%' and tblqlts.chitiethinhthai Not like 'Xe ô tô%'" .
+		",tblqlts.phantram,tblqlts.phantram32,tblhaomon.namhaomon,tblhaomon.sodu,tblhaomon.sotien,tblhaomon.phantram,tblqlts.sohaomon,tblqlts.conlai,tblhaomon.TThaomon" .
+		" from tblqlts inner join tblhaomon on tblqlts.TTQLTS = tblhaomon.TTTS inner join tbldanhsachqd32 on tblqlts.mataisan = tbldanhsachqd32.mataisanqd32 " .
+		" where tblqlts.nguonkhac+tblqlts.ngansach < 500000000 and  tblqlts.madonvi = '$ab' and tbldanhsachqd32.hinhthaitaisan not like 'Nhà%' and tbldanhsachqd32.hinhthaitaisan not like 'Vật kiến trúc%' and" .
+		" tbldanhsachqd32.hinhthaitaisan not Like 'Phương tiện vận tải%' and tbldanhsachqd32.hinhthaitaisan not like 'Đất%' and tbldanhsachqd32.hinhthaitaisan not like 'Quyền sử dụng đất%' and tbldanhsachqd32.hinhthaitaisan not like 'Xe ô tô%'" .
 		($key[0] !=""?" and noidung = '".$key[0]."'":"").
 		($key[1] !=""?" and nguoisudung = '".$key[1]."'":"").
 		" and tblhaomon.TThaomon in (Select Min(TThaomon) as TThaomon from tblhaomon group by TTQLTS) order by TTQLTS DESC";
 }else {
-	$sql = "select *" .
-		" from tblqlts inner join tblhaomon on tblqlts.TTQLTS = tblhaomon.TTTS" .
-		" where tblqlts.nguonkhac+tblqlts.ngansach <500000000 and  tblqlts.madonvi = '$ab' and tblqlts.chitiethinhthai <> 'Nhà' and" .
-		" tblqlts.chitiethinhthai not Like 'Phương tiện vận tải%' and tblqlts.chitiethinhthai not like 'Đất%' and tblqlts.chitiethinhthai not like 'Quyền sử dụng đất%' and tblqlts.chitiethinhthai not like 'Vật kiến trúc%' and tblqlts.chitiethinhthai not like 'Nhà%' and tblqlts.chitiethinhthai Not like 'Xe ô tô%'" .
-		" order by TTQLTS DESC";
-
 	$sql = "select tblqlts.TTQLTS,tblqlts.mataisan,tblqlts.tentaisan,tblqlts.tenchitiet,tblqlts.ngaynhap,tblqlts.namsanxuat,tblqlts.NUOCSX,tblqlts.ngaysudung," .
 		"tblqlts.DTKV,tblqlts.DTXD,tblqlts.ngansach,tblqlts.nguonkhac,tblqlts.chitiethinhthai,tblqlts.noidung,tblqlts.DVT,tblqlts.GCTS,tblqlts.ttkhac" .
-		",tblqlts.phantram,tblqlts.phantram32,tblhaomon.namhaomon,tblhaomon.sodu,tblhaomon.sotien,tblhaomon.phantram,tblqlts.sohaomon,tblqlts.conlai,tblhaomon.TThaomon,tblqlts.theodoi" .
-		" from tblqlts inner join tblhaomon on tblqlts.TTQLTS = tblhaomon.TTTS" .
-		" where tblqlts.nguonkhac+tblqlts.ngansach <500000000 and  tblqlts.madonvi = '$ab' and tblqlts.chitiethinhthai <> 'Nhà' and" .
-		" tblqlts.chitiethinhthai not Like 'Phương tiện vận tải%' and tblqlts.chitiethinhthai not like 'Đất%' and tblqlts.chitiethinhthai not like 'Quyền sử dụng đất%' and tblqlts.chitiethinhthai not like 'Vật kiến trúc%' and tblqlts.chitiethinhthai not like 'Nhà%' and tblqlts.chitiethinhthai Not like 'Xe ô tô%'" .
+		",tblqlts.phantram,tblqlts.phantram32,tblhaomon.namhaomon,tblhaomon.sodu,tblhaomon.sotien,tblhaomon.phantram,tblqlts.sohaomon,tblqlts.conlai,tblhaomon.TThaomon" .
+		" from tblqlts inner join tblhaomon on tblqlts.TTQLTS = tblhaomon.TTTS inner join tbldanhsachqd32 on tblqlts.mataisan = tbldanhsachqd32.mataisanqd32 " .
+		" where tblqlts.nguonkhac+tblqlts.ngansach < 500000000 and  tblqlts.madonvi = '$ab' and tbldanhsachqd32.hinhthaitaisan not like 'Nhà%' and tbldanhsachqd32.hinhthaitaisan not like 'Vật kiến trúc%' and" .
+		" tbldanhsachqd32.hinhthaitaisan not Like 'Phương tiện vận tải%' and tbldanhsachqd32.hinhthaitaisan not like 'Đất%' and tbldanhsachqd32.hinhthaitaisan not like 'Quyền sử dụng đất%' and tbldanhsachqd32.hinhthaitaisan not like 'Xe ô tô%'" .
 		" and tblhaomon.TThaomon in (Select Min(TThaomon) as TThaomon from tblhaomon group by TTQLTS) order by TTQLTS DESC";
 }
 $kq = mysqli_query($con,$sql);
