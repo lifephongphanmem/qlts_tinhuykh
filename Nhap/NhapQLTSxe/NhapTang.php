@@ -746,7 +746,7 @@ function ktthanhly($mats)
 //
 $sql = "select TTQLTS,mataisan,tentaisan,tenchitiet,ngaynhap,ngaysudung,noidung,namsanxuat,NUOCSX,BKSXE,NHXE,CNXE,CXXE,NGGOXE,PLSD,CDSD,ngansach,nguonkhac,ttkhac,tblqlts.chitiethinhthai,sonamsd ".
 	" from tblqlts inner join tbldanhsachqd32 on tblqlts.mataisan = tbldanhsachqd32.mataisanqd32".
-	" where madonvi = '$ab' and tbldanhsachqd32.hinhthaitaisan like 'Phương tiện vận tải%'";
+	" where madonvi = '$ab' and tbldanhsachqd32.hinhthaitaisan like 'Xe ô tô%";
 $kq = mysqli_query($con,$sql);
 $ngnh="";$ngsd="";$matm = "";$stt=0;   
 if(mysqli_num_rows($kq)>0){
