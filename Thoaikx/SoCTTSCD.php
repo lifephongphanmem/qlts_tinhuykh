@@ -302,7 +302,7 @@ foreach($_aDV as $_madv) {
 		}
 		$sqlts = $sqlts . ")";
 	}
-	$sqlts = $sqlts ." order by tbldanhsachqd32.ttsx";
+	$sqlts = $sqlts ." order by tbldanhsachqd32.ttsx,tbldanhsachqd32.mataisanqd32,tblqlts.TTQLTS";
 	//echo $sqlts;
 	$queryts = mysqli_query($con, $sqlts);
 	$tg = array(array(0, "A", "B", "C", "D", 0, 0, 0, 0, 0, 0, 0, 0));
@@ -410,7 +410,7 @@ foreach($_aDV as $_madv) {
 			$nhoms4 = dinhdangso($nhoms4);
 			$nhoms5 = dinhdangso($nhoms5);
 				echo "<tr style='font-weight: bold'>";
-				echo "<td style='text-align: left;'><nobr>" . $tg[$i][1] . "</nobr></td>";
+				echo "<td style='text-align: left;'><nobr>"  . "</nobr></td>";
 				echo "<td style='text-align: left;'><nobr>" . $tennhom . "</nobr></td>";
 				echo "<td style='text-align: left;'></td>";
 				echo "<td style='text-align: left;'></td>";

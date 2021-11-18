@@ -1242,7 +1242,7 @@ if(isset($_POST["luupb"]))
 			</div>
 			<label for="field-4" class="col-sm-15 control-label">Người sử dụng:</label>
 			<?php
-			$sql="select hoten from tbldanhsachcb where tenphonglv = '$row[7]'";
+			$sql="select hoten from tbldanhsachcb ";
 			$sql1=mysqli_query($con,$sql);
 			echo"<div id='canbo' class='col-sm-45'>";
 			echo"<select name='nguoisudung' class='form-control' id='nguoisudung'>";

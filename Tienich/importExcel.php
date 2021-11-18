@@ -592,75 +592,75 @@ else
 								</div>
 								<label class="col-sm-15 control-label">Mã tài sản<span style="padding-left:0px; color:red;">*</span>:</label>
 								<div class="col-sm-15">
-									<input name="mataisan" type="text" data-validate = "required" class="form-control" id="field-3" value=""/>
+									<input name="mataisan" type="text" data-validate = "required" class="form-control" id="field-3" value="A"/>
 								</div>
 								<label for="field-3" class="col-sm-15 control-label">Tên chi tiết<span style="padding-left:0px; color:red;">*</span>:</label>
 								<div class="col-sm-15">
-									<input name="tenchitiet" type="text" data-validate = "required" class="form-control" id="field-3" value=""/>
+									<input name="tenchitiet" type="text" data-validate = "required" class="form-control" id="field-3" value="B"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Ngày nhập<span style="padding-left:0px; color:red;">*</span>:</label>
 								<div class="col-sm-15">
-									<input  name="ngaynhap"  type="text" data-validate = "required" class="form-control" id="ngaynhap" value=""/>
+									<input  name="ngaynhap"  type="text" data-validate = "required" class="form-control" id="ngaynhap" value="L"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Ngày sử dụng<span style="padding-left:0px; color:red;">*</span>:</label>
 								<div class="col-sm-15">
-									<input name="ngaysudung" type="text" data-validate = "required" class="form-control" id="ngaysudung" value=""/>
+									<input name="ngaysudung" type="text" data-validate = "required" class="form-control" id="ngaysudung" value="D"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Diện tích KV (SL)<span style="padding-left:0px; color:red;">*</span>:</label>
 								<div class="col-sm-15" >
-									<input name="DTKV"  type="text" class="form-control" id="DTKV" value=""/>
+									<input name="DTKV"  type="text" class="form-control" id="DTKV" value="N"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Diện tích XD:</label>
 								<div class="col-sm-15">
-									<input name="DTXD" type="text"  class="form-control"  id="DTXD" value=""/>
+									<input name="DTXD" type="text"  class="form-control"  id="DTXD" value="P"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Tổng diện tích:</label>
 								<div class="col-sm-15">
-									<input name="TDTSXD" type="text"  class="form-control"  id="TDTSXD" value=""/>
+									<input name="TDTSXD" type="text"  class="form-control"  id="TDTSXD" value="Q"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Nguồn ngân sách:</label>
 								<div class="col-sm-15">
-									<input name="ngansach" type="text" class="form-control"  id="ngansach" value=""/>
+									<input name="ngansach" type="text" class="form-control"  id="ngansach" value="F"/>
 								</div>
 								<label for="field-3" class="col-sm-15 control-label">Nguồn khác:</label>
 								<div class="col-sm-15">
-									<input name="nguonkhac" type="text" class="form-control"  id="nguonkhac" value=""/>
+									<input name="nguonkhac" type="text" class="form-control"  id="nguonkhac" value="M"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Tổng số HM:</label>
 								<div class="col-sm-15">
-									<input name="sohaomon" type="text"  class="form-control"  id="sohaomon" value=""/>
+									<input name="sohaomon" type="text"  class="form-control"  id="sohaomon" value="I"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Hao mòn năm:</label>
 								<div class="col-sm-15">
-									<input name="haomonnam" type="text"  class="form-control"  id="haomonnam" value=""/>
+									<input name="haomonnam" type="text"  class="form-control"  id="haomonnam" value="H"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Số dư hao mòn:</label>
 								<div class="col-sm-15">
-									<input name="soduhaomon" type="text"  class="form-control"  id="soduhaomon" value=""/>
+									<input name="soduhaomon" type="text"  class="form-control"  id="soduhaomon" value="G"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Nơi sử dụng:</label>
 								<div class="col-sm-15">
-									<input name="noidung" type="text"  class="form-control" id="noidung" value=""/>
+									<input name="noidung" type="text"  class="form-control" id="noidung" value="K"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Đơn vị tính:</label>
 								<div class="col-sm-15">
-									<input name="DVT" type="text"  class="form-control" id="DVT" value=""/>
+									<input name="DVT" type="text"  class="form-control" id="DVT" value="R"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Thông tin khác:</label>
 								<div class="col-sm-15">
-									<input name="ttkhac" type="text"  class="form-control" id="ttkhac" value=""/>
+									<input name="ttkhac" type="text"  class="form-control" id="ttkhac" value="S"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Nước sản suất:</label>
 								<div class="col-sm-15">
-									<input name="NUOCSX" type="text"  class="form-control" id="NUOCSX" value=""/>
+									<input name="NUOCSX" type="text"  class="form-control" id="NUOCSX" value="C"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Người sử dụng:</label>
 								<div class="col-sm-15">
-									<input name="nguoisudung" type="text"  class="form-control" id="nguoisudung" value=""/>
+									<input name="nguoisudung" type="text"  class="form-control" id="nguoisudung" value="T"/>
 								</div>
 								<label for="field-4" class="col-sm-15 control-label">Năm hao mòn:</label>
 								<div class="col-sm-15">
-									<input name="namhaomon" type="text"  class="form-control" id="namhaomon" value=""/>
+									<input name="namhaomon" type="text"  class="form-control" id="namhaomon" value="O"/>
 								</div>
 							</fieldset>
 						</div>
@@ -806,7 +806,7 @@ if(isset($_POST['sua'])) {
 						$phantram32 = $row[5];
 					}
 					$sohmnam = 0;
-					if($conlai > 0)
+					if($conlai >= 0)
 						//$sohmnam = $nguyengia * $pthm /100;
 						$sohmnam = $haomonnam;
 					//$soduhm = kieudouble($sohaomon) - kieudouble($sohmnam);
@@ -824,6 +824,7 @@ if(isset($_POST['sua'])) {
 					$IDTS = IDTS();
 					$sql = "Insert into tblhaomon(ngaythang,TTQLTS,namhaomon,phantram,sodu,sotien,madonvi,TTTS,excel)" .
 						" values('$ngaynhap',$IDTS,$namhm,$pthm,$soduhm,$sohmnam,'$ab',$IDTS,'1')";
+					echo $sql;
 					$kq = mysqli_query($con, $sql);
 					if(!$kq)
 						echo  "Lỗi Insert ". $sql;
