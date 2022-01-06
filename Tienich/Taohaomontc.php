@@ -502,7 +502,11 @@ $(document).ready(function(){
 								<div class="col-sm-8">
 									<input name="namhaomon" type="text" class="form-control" id="field-3" value="">
 								</div>								
-							</div>							
+							</div>
+							<div class="form-group">
+								<input type="checkbox" name="tudong" id = "tudong"/>
+								Không tính hao mòn tự động
+							</div>
 							<div class="form-group" style="text-align:center;">								
 								<div id="HM" class="col-sm-offset-3 col-sm-8">
 									<button type="submit" name="sua" class="btn btn-success">Tạo HM/KH</button>
@@ -516,7 +520,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 <?php
-	function soduhm($idts,$nam,$namsd,$nguyengia)
+	function soduhmtd($idts,$nam,$namsd,$nguyengia)
 	{
 		$soduhm = 0;
 		for ($i = $namsd; $i < $nam; $i++){
@@ -524,6 +528,18 @@ $(document).ready(function(){
 		}
 		if($soduhm >= $nguyengia)
 			$soduhm = $nguyengia;
+		return $soduhm;
+	}
+	function soduhm($idts,$nam)
+	{
+		global $con;
+		$soduhm = 0;
+		$sql = "select namhaomon, sodu,sotien from tblhaomon WHERE 	TTQLTS = $idts and namhaomon = ". ($nam-1);
+		$qrsql = mysqli_query($con,$sql);
+		echo $sql;
+		while ($row = mysqli_fetch_array($qrsql)){
+			$soduhm = $row['sodu'] + $row['sotien'];
+		}
 		return $soduhm;
 	}
 	function sohaomon($idts,$nam)
@@ -584,42 +600,42 @@ $(document).ready(function(){
 
 	function soduhm_cu($idts,$nam)
 {
-global $con;
-$namsd = 0;
-$sohaomon = 0;
-$nguyengia = 0;
-$hm = 0;
-$hm32 = 0;
-$hmnam = 0;
-$sql = "Select year(ngaysudung) as namsd,(ngansach+nguonkhac) as nguyengia, phantram, phantram32 From Tblqlts where TTQLTS = ".$idts;
-$qrsql = mysqli_query($con,$sql);
-while($row = mysqli_fetch_array($qrsql)) {
-	$namsd = $row['namsd'];
-	$nguyengia = $row['nguyengia'];
-	$hm = $row['phantram'];
-	$hm32 = $row['phantram32'];
-}
-$nam = $nam -1;
-if($nam >= $namsd) {
-	if ($nam < 2015)
-		$sohaomon += $nguyengia * $hm32 * ($nam - $namsd) / 100;
-	if ($nam >= 2015) {
-		if($namsd >=  2013)
-			$sohaomon += $nguyengia * $hm32 * (2015 - $namsd) / 100;
-		if($namsd <  2013)
-			$sohaomon += $nguyengia * $hm32 * (2014 - $namsd) / 100;
-		$sohaomon += $nguyengia * $hm * ($nam - 2014) / 100;
+	global $con;
+	$namsd = 0;
+	$sohaomon = 0;
+	$nguyengia = 0;
+	$hm = 0;
+	$hm32 = 0;
+	$hmnam = 0;
+	$sql = "Select year(ngaysudung) as namsd,(ngansach+nguonkhac) as nguyengia, phantram, phantram32 From Tblqlts where TTQLTS = ".$idts;
+	$qrsql = mysqli_query($con,$sql);
+	while($row = mysqli_fetch_array($qrsql)) {
+		$namsd = $row['namsd'];
+		$nguyengia = $row['nguyengia'];
+		$hm = $row['phantram'];
+		$hm32 = $row['phantram32'];
 	}
-}
-if($sohaomon >= $nguyengia)
-	$sohaomon = $nguyengia;
-//$nam = kieudouble($nam)-1;
-//$sql = "Select sodu,sotien from tblhaomon where TTQLTS = ".$idts." and namhaomon =".$nam;
-//$kq = mysqli_query($con,$sql);
-//while($row=mysqli_fetch_array($kq)){
-//	$hmnam = $row[0]+$row[1];
-//}
-return $sohaomon;
+	$nam = $nam -1;
+	if($nam >= $namsd) {
+		if ($nam < 2015)
+			$sohaomon += $nguyengia * $hm32 * ($nam - $namsd) / 100;
+		if ($nam >= 2015) {
+			if($namsd >=  2013)
+				$sohaomon += $nguyengia * $hm32 * (2015 - $namsd) / 100;
+			if($namsd <  2013)
+				$sohaomon += $nguyengia * $hm32 * (2014 - $namsd) / 100;
+			$sohaomon += $nguyengia * $hm * ($nam - 2014) / 100;
+		}
+	}
+	if($sohaomon >= $nguyengia)
+		$sohaomon = $nguyengia;
+	//$nam = kieudouble($nam)-1;
+	//$sql = "Select sodu,sotien from tblhaomon where TTQLTS = ".$idts." and namhaomon =".$nam;
+	//$kq = mysqli_query($con,$sql);
+	//while($row=mysqli_fetch_array($kq)){
+	//	$hmnam = $row[0]+$row[1];
+	//}
+	return $sohaomon;
 }
 	function luykehaomon($nambd,$namkt,$nguyengia,$haomonnam,$luyketruoc)
 {
@@ -636,69 +652,67 @@ return $luykehm;
 
 }
 	function soduhaomon($idts,$nam)
-{
-global $con;
-$namsd = 0;
-$sohaomon = 0;
-$nguyengia = 0;
-$hm = 0;
-$hm32 = 0;
-$hmnam = 0;
-$sql = "Select year(ngaysudung) as namsd,(ngansach+nguonkhac) as nguyengia, phantram, phantram32 From Tblqlts where TTQLTS = ".$idts;
-$qrsql = mysqli_query($con,$sql);
-while($row = mysqli_fetch_array($qrsql)) {
-	$namsd = $row['namsd'];
-	$nguyengia = $row['nguyengia'];
-	$hm = $row['phantram'];
-	$hm32 = $row['phantram32'];
-}
-$ar = array();
-$sql = "Select DISTINCT year(ngaytanggiam) as nam from tbltanggiam WHERE TTQLTS = $idts and year(ngaytanggiam) < $nam and year(ngaytanggiam) > 0 ORDER BY year(ngaytanggiam) ASC";
-$qrsql = mysqli_query($con,$sql);
-while($rown = mysqli_fetch_array($qrsql))
-{
-	$sotien = 0;
-	$sql = "Select tanggiam,sotien From tbltanggiam WHERE TTQLTS = $idts  and year(ngaytanggiam) = $rown[nam] ";
-	$qrsql = mysqli_query($con,$sql);
-	while($row = mysqli_fetch_array($qrsql))
 	{
-		if($row['tanggiam'] == "Tăng")
-			$sotien += $row['sotien'];
-		if($row['tanggiam'] == "Giảm")
-			$sotien -= $row['sotien'];
-	}
-	$ar[]=array('nam'=>$rown['nam'],
-		'sotien'=>$sotien
-	);
-}
-$nambd = 0;
-$namkt = 0;
-foreach	($ar as $tanggiam) {
-	//$tanggiam['nam'] = $nam - 1;
-	$luyketruoc = soduhm($idts,$tanggiam['nam']);
-	$nguyengiamoi = $nguyengia + $tanggiam['sotien'];
-	if ($tanggiam['nam'] >= $namsd) {
-		if ($nam < 2015)
-			$sohaomon += $nguyengia * $hm32 * ($nam - $namsd) / 100;
-		if ($nam >= 2015) {
-			if ($namsd >= 2013)
-				$sohaomon += $nguyengia * $hm32 * (2015 - $namsd) / 100;
-			if ($namsd < 2013)
-				$sohaomon += $nguyengia * $hm32 * (2014 - $namsd) / 100;
-			$sohaomon += $nguyengia * $hm * ($nam - 2014) / 100;
+		global $con;
+		$namsd = 0;
+		$sohaomon = 0;
+		$nguyengia = 0;
+		$hm = 0;
+		$hm32 = 0;
+		$hmnam = 0;
+		$sql = "Select year(ngaysudung) as namsd,(ngansach+nguonkhac) as nguyengia, phantram, phantram32 From Tblqlts where TTQLTS = " . $idts;
+		$qrsql = mysqli_query($con, $sql);
+		while ($row = mysqli_fetch_array($qrsql)) {
+			$namsd = $row['namsd'];
+			$nguyengia = $row['nguyengia'];
+			$hm = $row['phantram'];
+			$hm32 = $row['phantram32'];
 		}
+		$ar = array();
+		$sql = "Select DISTINCT year(ngaytanggiam) as nam from tbltanggiam WHERE TTQLTS = $idts and year(ngaytanggiam) < $nam and year(ngaytanggiam) > 0 ORDER BY year(ngaytanggiam) ASC";
+		$qrsql = mysqli_query($con, $sql);
+		while ($rown = mysqli_fetch_array($qrsql)) {
+			$sotien = 0;
+			$sql = "Select tanggiam,sotien From tbltanggiam WHERE TTQLTS = $idts  and year(ngaytanggiam) = $rown[nam] ";
+			$qrsql = mysqli_query($con, $sql);
+			while ($row = mysqli_fetch_array($qrsql)) {
+				if ($row['tanggiam'] == "Tăng")
+					$sotien += $row['sotien'];
+				if ($row['tanggiam'] == "Giảm")
+					$sotien -= $row['sotien'];
+			}
+			$ar[] = array('nam' => $rown['nam'],
+				'sotien' => $sotien
+			);
+		}
+		$nambd = 0;
+		$namkt = 0;
+		foreach ($ar as $tanggiam) {
+			//$tanggiam['nam'] = $nam - 1;
+			$luyketruoc = soduhm($idts, $tanggiam['nam']);
+			$nguyengiamoi = $nguyengia + $tanggiam['sotien'];
+			if ($tanggiam['nam'] >= $namsd) {
+				if ($nam < 2015)
+					$sohaomon += $nguyengia * $hm32 * ($nam - $namsd) / 100;
+				if ($nam >= 2015) {
+					if ($namsd >= 2013)
+						$sohaomon += $nguyengia * $hm32 * (2015 - $namsd) / 100;
+					if ($namsd < 2013)
+						$sohaomon += $nguyengia * $hm32 * (2014 - $namsd) / 100;
+					$sohaomon += $nguyengia * $hm * ($nam - 2014) / 100;
+				}
+			}
+		}
+		if ($sohaomon >= $nguyengia)
+			$sohaomon = $nguyengia;
+		//$nam = kieudouble($nam)-1;
+		//$sql = "Select sodu,sotien from tblhaomon where TTQLTS = ".$idts." and namhaomon =".$nam;
+		//$kq = mysqli_query($con,$sql);
+		//while($row=mysqli_fetch_array($kq)){
+		//	$hmnam = $row[0]+$row[1];
+		//}
+		return $sohaomon;
 	}
-}
-if($sohaomon >= $nguyengia)
-	$sohaomon = $nguyengia;
-//$nam = kieudouble($nam)-1;
-//$sql = "Select sodu,sotien from tblhaomon where TTQLTS = ".$idts." and namhaomon =".$nam;
-//$kq = mysqli_query($con,$sql);
-//while($row=mysqli_fetch_array($kq)){
-//	$hmnam = $row[0]+$row[1];
-//}
-return $sohaomon;
-}
 	function sohmnam($nguyengia,$phantram,$TTQLTS)
 {
 $tanggiam = 0;
@@ -811,7 +825,11 @@ if (isset($_POST['sua']))
 	    $hmnam = sohaomon($row["TTQLTS"],$namhm);
 		//$hmnam = ($row[1]*$row[2])/100;
 		//$sodu = soduhm($row[0],$_POST['namhaomon']);
-		$sodu = soduhm($row["TTQLTS"],$namhm,$row["nsd"],$nguyengia);
+		if(isset($_POST['tudong']) && $_POST['tudong'] != 'No'){
+			$sodu = soduhm($row["TTQLTS"],$namhm);
+		}else{
+			$sodu = soduhmtd($row["TTQLTS"],$namhm,$row["nsd"],$nguyengia);
+		}
 		if($sodu+$hmnam >= $nguyengia)
 		    $hmnam = $nguyengia-$sodu;
 		$sqlin = "Insert into tblhaomon(TTQLTS,ngaythang,namhaomon,sodu,sotien,phantram,madonvi) values($row[0],'$ngaydk',$namhm,$sodu,$hmnam,$row[1],'$ma[0]')";
