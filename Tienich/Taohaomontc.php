@@ -536,7 +536,6 @@ $(document).ready(function(){
 		$soduhm = 0;
 		$sql = "select namhaomon, sodu,sotien from tblhaomon WHERE 	TTQLTS = $idts and namhaomon = ". ($nam-1);
 		$qrsql = mysqli_query($con,$sql);
-		echo $sql;
 		while ($row = mysqli_fetch_array($qrsql)){
 			$soduhm = $row['sodu'] + $row['sotien'];
 		}
