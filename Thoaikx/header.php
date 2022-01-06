@@ -269,56 +269,7 @@
 						</li>
 					</ul>
 				</li>
-				<li>
-					<a href="forms-main.html">
-						<i class="entypo-doc-text"></i>
-						<span class="title">Tổng hợp báo cáo theo thông tư 09</span>
-					</a>
-					<ul>
-						<li>
-							<?php
-							echo "<a  href=\"/QLTS/Thoaikx/ThoaiTT09_01TSNN.php?id=$madv\">							
-								<span class='title'>Danh mục trụ sở làm việc, cơ sở HĐSN đề nghị xử lý (TT09)</span>
-							</a>";
-							?>
-						</li>
-						<li>
-							<?php
-							echo "<a  href=\"/QLTS/Thoaikx/ThoaiTT09-02TSNN.php?id=$madv\">							
-								<span class='title'>Danh mục xe ô tô đề nghị xử lý (TT09)</span>
-							</a>";
-							?>
-						</li>
-						<li>
-							<?php
-							echo "<a  href=\"/QLTS/Thoaikx/ThoaiTT09_03SNN.php?id=$madv\">							
-								<span class='title'>Danh mục tài sản khác đề nghị xử lý (TT09)</span>
-							</a>";
-							?>
-						</li>
-						<li>
-							<?php
-							echo "<a  href=\"/QLTS/Thoaikx/ThoaiTT09_01DKTSNN.php?id=$madv\">							
-								<span class='title'>Báo cáo kê khai trụ sở làm việc, cơ sở HĐSN (TT09)</span>
-							</a>";
-							?>
-						</li>
-						<li>
-							<?php
-							echo "<a  href=\"/QLTS/Thoaikx/ThoaiTT09_02DKTSNN.php?id=$madv\">							
-								<span class='title'>Báo cáo kê khai ô tô (TT09)</span>
-							</a>";
-							?>
-						</li>
-						<li>
-							<?php
-							echo "<a  href=\"/QLTS/Thoaikx/ThoaiTT09_03DKTSNN.php?id=$madv\">							
-								<span class='title'>Báo cáo kê khai tài sản có nguyên giá lớn hơn 500 triệu (TT09)</span>
-							</a>";
-							?>
-						</li>
-					</ul>
-				</li>
+				
 				<li>
 					<a href="tables-main.html">
 						<i class="entypo-window"></i>

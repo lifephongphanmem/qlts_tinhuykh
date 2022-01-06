@@ -54,15 +54,12 @@ if(isset($_POST['create']))
 ?>
 <table cellspacing="0" cellpadding="0" border="0">
         <tr>
-            <td style="text-align: left;font-weight: bold;">
-				<nobr>Bộ: </nobr>
-            </td>
-            <td width="40%">
-            </td>
+			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Tên đơn vị: ".$madv[2]; ?></nobr></td>
+			<td>
 			<td style="text-align: center; font-weight: bold;"><nobr>Mẫu số : S26-H</nobr></td>
         </tr>
 		<tr>
-			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Tên đơn vị: ".$madv[2]; ?></nobr></td>
+			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Mã QHNS: ".$madv[1]; ?></nobr></td>
 			<td>
 			</td>
 			<td style="text-align: center;" ><nobr>(Ban hành theo Thông tư số 107/2017/TT-BTC </br> ngày 10/10/2017 của Bộ Tài chính)</nobr></td>

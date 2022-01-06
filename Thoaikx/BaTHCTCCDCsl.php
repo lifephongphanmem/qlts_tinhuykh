@@ -47,18 +47,18 @@ if(isset($_POST['create'])){
 ?>
     <table cellspacing="0" cellpadding="0" border="0">
         <tr>
-            <td style="text-align: left;font-weight: bold;">
-				<nobr>Bộ: </nobr>
-            </td>
+			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Tên đơn vị: ".$tendv; ?></nobr></td>
+			<td>
             <td width="40%">
             </td>
 			<td style="text-align: center; font-weight: bold;"><nobr>Mẫu số : S23-H</nobr></td>
         </tr>
 		<tr>
-			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Tên đơn vị: ".$tendv; ?></nobr></td>
+
+			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Mã QHNS: ".$madv[1]; ?></nobr></td>
 			<td>
 			</td>
-			<td style="text-align: center;" ><nobr>(Ban hành theo QĐ số: 19 - 2006/QĐ/BTC </br>ngày 30/03/2006 của Bộ trưởng BTC)</nobr></td>
+			<td style="text-align: center;" ><nobr>(Ban hành theo Thông tư số 107/2017/TT-BTC </br>ngày 10/10/2017 của Bộ Tài chính)</nobr></td>
 		</tr>
 		</table>
 		<table cellspacing="0" cellpadding="0" border="0">
@@ -68,12 +68,13 @@ if(isset($_POST['create'])){
 		<tr>
 			<td  style="text-align: center;font-weight: bold;">CÔNG CỤ, DỤNG CỤ, SẢN PHẨM, HÀNG HÓA</td>
 		</tr>
-		<tr>
-			<td  style="text-align: center;font-weight: bold; font-style: italic"> Tài khoản: ..............</td>
-		</tr>
+
 		<tr>
 			<td style="text-align: center;font-weight: bold; font-style: italic;"> Tháng: ..........năm .............</td>
 		</tr>
+			<tr>
+				<td  style="text-align: center;font-weight: bold; font-style: italic"> Tài khoản: ..............</td>
+			</tr>
 	</table>
 	<table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
 		<tr>
@@ -182,6 +183,10 @@ foreach($_aDV as $_madv) {
 	$cc = array();
 	$ton = 0;
 	$cs = 0;
+	$tongnhap =0;
+	$tongxuat =0;
+	$tongdk = 0;
+	$tongck = 0;
 	$sql = "Select tenchitiet from tblqlcc WHERE madonvi = '$_madv[ma]'".
 			($denngay == ""?"":" and ngaysudung <= '" . doingay($denngay) . "'")
 			. " Group by tenchitiet";
@@ -195,16 +200,13 @@ while ($row = mysqli_fetch_array($qrsql)) {
 	}
 }
 $ton = 0;$stt=0;
-$tongnhap =0;
-$tongxuat =0;
-$tongdk = 0;
-$tongck = 0;
+
 	foreach ($cc as $value) {
 		$stt++;
-		$ton = (kieudouble($value[1]) + kieudouble($value[2]) - kieudouble($value[3]));
-		$tongnhap += kieudouble($value[2]);
-		$tongxuat += kieudouble($value[3]);
-		$tongdk += kieudouble($value[1]);
+		$ton = $value[1] + $value[2] - $value[3];
+		$tongnhap += $value[2];
+		$tongxuat += $value[3];
+		$tongdk += $value[1];
 		$tongck += $ton;
 		echo "<tr>";
 		echo "<td style='text-align: center;'>$stt</td>";

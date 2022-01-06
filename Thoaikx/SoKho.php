@@ -53,43 +53,52 @@ if(isset($_POST['create'])){
 ?>
     <table cellspacing="0" cellpadding="0" border="0">
         <tr>
-            <td style="text-align: left;font-weight: bold;">
-				<nobr>Bộ: </nobr>
-            </td>
+			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Tên đơn vị: ".$tendv; ?></nobr></td>
+			<td>
             <td width="40%">
             </td>
 			<td style="text-align: center; font-weight: bold;"><nobr>Mẫu số : S21-H</nobr></td>
         </tr>
 		<tr>
-			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Tên đơn vị: ".$tendv; ?></nobr></td>
+
+			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Mã QHNS: ".$madv[1]; ?></nobr></td>
 			<td>
 			</td>
-			<td style="text-align: center;" ><nobr>(Ban hành theo QĐ số: 19 - 2006/QĐ/BTC </br>ngày 30/03/2006 của Bộ trưởng BTC)</nobr></td>
+			<td style="text-align: center;" ><nobr>(Ban hành theo Thông tư số 107/2017/TT-BTC </br>ngày 10/10/2017 của Bộ Tài chính)</nobr></td>
 		</tr>
 		</table>
 		<table cellspacing="0" cellpadding="0" border="0">
 		<tr>
-            <td  style="text-align: center;font-weight: bold;">SỔ KHO</td>
+            <td colspan="2"  style="text-align: center;font-weight: bold;">SỔ KHO</td>
 		</tr>
 		<tr>
-			<td  style="text-align: center;font-weight: bold;">(Hoặc thẻ kho)</td>
+			<td colspan="2" style="text-align: center;font-weight: bold;">(Hoặc thẻ kho)</td>
+		</tr>
+		<tr>
+			<td width="50%" style="text-align: right;">Ngày lập thẻ:..................</td>
+			<td  style="text-align: left;">Số tờ: ..................</td>
 		</tr>
 		<tr>
 			<td  style="text-align: left;"> - Tên nhãn hiệu quy cách, vật tư: <?php echo $val[1];?></td>
+			<td  style="text-align: left;"> Đơn vị tính: <?php echo $val[2];?></td>
 		</tr>
 		<tr>
-			<td style="text-align: left;"> - Đơn vị tính: <?php echo $val[2];?>.......................... Mã số: <?php echo $val[0];?></td>
+			<td style="text-align: left;"> - Quy cách, phẩm chất: .......................... </td>
+			<td style="text-align: left;">  Mã số: <?php echo $val[0];?></td>
 		</tr>
 	</table>
 	<table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">
 		<tr>
-			<th rowspan="2" width="4%">STT</th>
+			<th rowspan="3" width="8%">Ngày tháng ghi sổ</th>
+			<th colspan="3" width="10%">Chứng từ</th>
+			<th rowspan="3" width="30%">Diễn giải</th>
+			<th rowspan="3" width="8%">Ngày nhập xuất</th>
+			<th colspan="3" rowspan="2" width="30%">Số lượng</th>
+			<th rowspan="3" width="10%">Ghi chú (Ký xác nhận của kế toán)</th>
+		</tr>
+		<tr>
 			<th rowspan="2" width="8%">Ngày tháng</th>
 			<th colspan="2" width="10%">Số hiệu chứng từ</th>
-			<th rowspan="2" width="30%">Diễn giải</th>
-			<th rowspan="2" width="8%">Ngày nhập xuất</th>
-			<th colspan="3" width="30%">Số lượng</th>
-			<th rowspan="2" width="10%">Ký xác nhận của kế toán</th>
 		</tr>
 		<tr>
 			<th style="font-weight: inherit;">Nhập</th>
@@ -164,13 +173,13 @@ foreach($_aDV as $_madv) {
 			"  order by ngayxuat";
 	$qrsql = mysqli_query($con,$sql);
 	$ton = 0;$stt=0;
-	$sql = "Select NTCT,STR1,SL1,SL2 from tbldc ORDER BY NTCT,ID";
+	$sql = "Select NTCT,STR1,SL1,SL2,ID from tbldc ORDER BY NTCT,ID";
 	$qrsql = mysqli_query($con,$sql);
 	while($row = mysqli_fetch_array($qrsql)) {
 		$stt++;
 		$ton += ($row[2] - $row[3]);
 		echo "<tr>";
-		echo "<td style='text-align: center;'>$stt</td>";
+		echo "<td style='text-align: center;'>".ngaythang($row['NTCT'])."</td>";
 		echo "<td style='text-align: center;'><nobr>".ngaythang($row['NTCT'])."</nobr></td>";
 		echo "<td style='text-align: center;'><nobr></nobr></td>";
 		echo "<td style='text-align: center;'><nobr></nobr></td>";

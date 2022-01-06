@@ -47,18 +47,18 @@ if(isset($_POST['create'])){
 ?>
     <table cellspacing="0" cellpadding="0" border="0">
         <tr>
-            <td style="text-align: left;font-weight: bold;">
-				<nobr>Bộ: </nobr>
-            </td>
+			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Tên đơn vị: ".$tendv; ?></nobr></td>
+			<td>
             <td width="40%">
             </td>
 			<td style="text-align: center; font-weight: bold;"><nobr>Mẫu số : S23-H</nobr></td>
         </tr>
 		<tr>
-			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Tên đơn vị: ".$tendv; ?></nobr></td>
+			<td style="text-align: left;font-weight: bold;"><nobr><?php echo "Mã QHNS: ".$madv[1]; ?></nobr></td>
 			<td>
+
 			</td>
-			<td style="text-align: center;" ><nobr>(Ban hành theo QĐ số: 19 - 2006/QĐ/BTC </br>ngày 30/03/2006 của Bộ trưởng BTC)</nobr></td>
+			<td style="text-align: center;" ><nobr>(Ban hành theo Thông tư số 107/2017/TT-BTC </br>ngày 10/10/2017 của Bộ Tài chính)</nobr></td>
 		</tr>
 		</table>
 		<table cellspacing="0" cellpadding="0" border="0">
@@ -68,11 +68,12 @@ if(isset($_POST['create'])){
 		<tr>
 			<td  style="text-align: center;font-weight: bold;">CÔNG CỤ, DỤNG CỤ, SẢN PHẨM, HÀNG HÓA</td>
 		</tr>
-		<tr>
-			<td  style="text-align: center;font-weight: bold; font-style: italic"> Tài khoản: ..............</td>
-		</tr>
+
 		<tr>
 			<td style="text-align: center;font-weight: bold; font-style: italic;"> Tháng: ........... năm .............</td>
+		</tr>
+		<tr>
+			<td  style="text-align: center;font-weight: bold; font-style: italic"> Tài khoản: ..............</td>
 		</tr>
 	</table>
 	<table cellspacing="0" cellpadding="0" border="1" style="margin: 20px auto; border-collapse: collapse;">

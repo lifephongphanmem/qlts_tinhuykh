@@ -273,56 +273,7 @@
 						</li>
 					</ul>
 				</li>
-				<li  >
-					<a href="forms-main.html">
-						<i class="entypo-doc-text"></i>
-						<span class="title"><strong>Tổng hợp báo cáo theo thông tư 09</strong></span>
-					</a>
-					<ul>
-						<li>
-							
-							<a  href="/Thoaikx/ThoaiTT09_01TSNN.php">	<i class="entypo-book-open"></i>							
-								<span class='title'>Danh mục trụ sở làm việc, cơ sở HĐSN đề nghị xử lý (TT09)</span>
-							</a>
-							
-						</li>
-						<li>
-							
-							<a  href="/Thoaikx/ThoaiTT09-02TSNN.php">	<i class="entypo-book-open"></i>							
-								<span class='title'>Danh mục xe ô tô đề nghị xử lý (TT09)</span>
-							</a>
-						
-						</li>
-						<li>
-							
-							<a  href="/Thoaikx/ThoaiTT09_03SNN.php">	<i class="entypo-book-open"></i>							
-								<span class='title'>Danh mục tài sản khác đề nghị xử lý (TT09)</span>
-							</a>
-							
-						</li>
-						<li>
-							
-							<a  href="/Thoaikx/ThoaiTT09_01DKTSNN.php">	<i class="entypo-book-open"></i>							
-								<span class='title'>Báo cáo kê khai trụ sở làm việc, cơ sở HĐSN (TT09)</span>
-							</a>
-						
-						</li>
-						<li  >
-							
-							<a  href="/Thoaikx/ThoaiTT09_02DKTSNN.php">	<i class="entypo-book-open"></i>							
-								<span class='title'>Báo cáo kê khai ô tô (TT09)</span>
-							</a>
-							
-						</li>
-						<li>
-							
-							<a  href="/Thoaikx/ThoaiTT09_03DKTSNN.php">	<i class="entypo-book-open"></i>							
-								<span class='title'>Báo cáo kê khai tài sản có nguyên giá lớn hơn 500 triệu (TT09)</span>
-							</a>
-							
-						</li>
-					</ul>
-				</li>
+
 				<li <?php if (strlen($ma[0]) >= 16)
 					{
 						echo "style='display:none';";
@@ -385,39 +336,7 @@
 						</li>						
 					</ul>
 				</li>
-				<li >
-					<a href="tables-main.html">
-						<i class="entypo-window"></i>
-						<span class="title"><strong>Báo cáo kê khai theo TT 89</strong></span>
-					</a>
-					<ul>
-						<li>
-							<a  href="/Thoaitonghop/ThoaiCkQLSDTSCSHDSNlc.php">	<i class="entypo-book-open"></i>						
-								<span class='title'>Công khai quản lý, sử dụng TSLV, CSHĐSN</span>
-							</a>	
-						</li>
-						<li>
-							<a  href="/Thoaitonghop/ThoaiCkKHMSTSNNlc.php">	<i class="entypo-book-open"></i>						
-								<span class='title'>Công khai kế hoạch mua sắm tài sản nhà nước</span>
-							</a>	
-						</li>
-						<li>
-							<a  href="/Thoaitonghop/ThoaiCkKQTHMSTSNNlc.php">	<i class="entypo-book-open"></i>						
-								<span class='title'>Công khai kết quả mua sắm tài sản nhà nước</span>
-							</a>	
-						</li>
-						<li>
-							<a  href="/Thoaitonghop/ThoaiCkSDPTDLlc.php">	<i class="entypo-book-open"></i>						
-								<span class='title'>Công khai quản lý, sử dụng phương tiện đi lại và tài sản khác</span>
-							</a>	
-						</li>
-						<li>
-							<a  href="/Thoaitonghop/ThoaiCkTHXLTSNN.php">	<i class="entypo-book-open"></i>						
-								<span class='title'>Công khai tình hình xử lý tài sản</span>
-							</a>	
-						</li>
-					</ul>
-				</li>
+				
 				<li class="opened active">
 					<a href="tables-main.html">
 						<i class="entypo-window"></i>
