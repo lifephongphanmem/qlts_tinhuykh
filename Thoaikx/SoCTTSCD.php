@@ -306,8 +306,8 @@ foreach($_aDV as $_madv) {
 	$sqlts = $sqlts ." order by tbldanhsachqd32.ttsx,tbldanhsachqd32.mataisanqd32,tblqlts.TTQLTS";
 	//echo $sqlts;
 	$queryts = mysqli_query($con, $sqlts);
-	//$tg = array(array(0, "A", "B", "C", "D", 0, 0, 0, 0, 0, 0, 0, 0));
-	$tg = array();
+	$tg = array(array(0, "A", "B", "C", "D", 0, 0, 0, 0, 0, 0, 0, 0));
+	//$tg = array();
 	$cs = 0;
 	$i = 0;
 	$tongNG = 0;
@@ -325,10 +325,6 @@ foreach($_aDV as $_madv) {
 	$sl4 = 0;
 	$sl5 = 0;
 	while ($rowts = mysqli_fetch_array($queryts)) {
-		$sqlhm = "Select sodu,sotien from tblhaomon where TTQLTS =".$rowts['TTQLTS']." and namhaomon = $nam";
-		$qrsqlhm = mysqli_query($con,$sqlhm);
-		while($rowhm = mysqli_fetch_array($qrsqlhm)) {
-			$kq = 0;
 			$tg[$cs][0] = $cs + 1;
 			$tg[$cs][1] = $rowts['mataisan'];
 			$tg[$cs][2] = $rowts['mataisan'] . "." . $rowts['TTQLTS'];
@@ -340,6 +336,14 @@ foreach($_aDV as $_madv) {
 			$tg[$cs][8] = $rowts['sonamsd'];
 			$tg[$cs][9] = $rowts['phantram'];
 			$tg[$cs][10] = $rowts['NG'];
+			$tg[$cs][11] = 0;
+			$tg[$cs][12] = 0;
+			$tg[$cs][13] = 0;
+			$tg[$cs][14] = $rowts['NG'];
+		$sqlhm = "Select sodu,sotien from tblhaomon where TTQLTS =".$rowts['TTQLTS']." and namhaomon = $nam";
+		$qrsqlhm = mysqli_query($con,$sqlhm);
+		while($rowhm = mysqli_fetch_array($qrsqlhm)) {
+			$kq = 0;
 			$tg[$cs][11] = $rowhm['sodu'];
 			$tg[$cs][12] = $rowhm['sotien'];
 			$tg[$cs][13] = $rowhm['sotien'] + $rowhm['sodu'];
@@ -363,7 +367,7 @@ foreach($_aDV as $_madv) {
 	echo "<td colspan='12' style='vertical-align:middle;font-weight: bold;text-align: left'>$_madv[ten]</td>";
 	echo "</tr>";
 //
-	for ($i = 1; $i < $cs; $i++) {
+	for ($i = 0; $i < $cs; $i++) {
 		$tongNG += $tg[$i][10];
 		$tongHMdk += $tg[$i][11];
 		$tongHMtk += $tg[$i][12];
