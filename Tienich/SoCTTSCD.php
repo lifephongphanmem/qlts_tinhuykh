@@ -273,7 +273,7 @@ foreach($_aDV as $_madv) {
 	$sl4 = 0;
 	$sl5 = 0;
 	while ($rowts = mysqli_fetch_array($queryts)) {
-		$sqlhm = "Select sodu,sotien, max(namhaomon) as namhm from tblhaomon where TTQLTS =" . $rowts['TTQLTS'] . " and namhaomon <= $nam";
+		$sqlhm = "Select sodu,sotie from tblhaomon where TTQLTS =" . $rowts['TTQLTS'] . " and namhaomon = $nam";
 		$qrsqlhm = mysqli_query($con, $sqlhm);
 		while ($rowhm = mysqli_fetch_array($qrsqlhm)) {
 			$kq = 0;
@@ -288,17 +288,10 @@ foreach($_aDV as $_madv) {
 			$tg[$cs][8] = $rowts['sonamsd'];
 			$tg[$cs][9] = $rowts['phantram'];
 			$tg[$cs][10] = $rowts['NG'];
-			if ($rowhm['namhm'] == $nam) {
-				$tg[$cs][11] = $rowhm['sodu'];
-				$tg[$cs][12] = $rowhm['sotien'];
-				$tg[$cs][13] = $rowhm['sotien'] + $rowhm['sodu'];
-				$tg[$cs][14] = $rowts['NG'] - $rowhm['sotien'] - $rowhm['sodu'];
-			} else {
-				$tg[$cs][11] = $rowhm['sotien'] + $rowhm['sodu'];
-				$tg[$cs][12] = 0;
-				$tg[$cs][13] = $rowhm['sotien'] + $rowhm['sodu'];
-				$tg[$cs][14] = $rowts['NG'] - $rowhm['sotien'] - $rowhm['sodu'];
-			}
+			$tg[$cs][11] = $rowhm['sodu'];
+			$tg[$cs][12] = $rowhm['sotien'];
+			$tg[$cs][13] = $rowhm['sotien'] + $rowhm['sodu'];
+			$tg[$cs][14] = $rowts['NG'] - $rowhm['sotien'] - $rowhm['sodu'];
 		}
 
 		$cs = $cs + 1;
