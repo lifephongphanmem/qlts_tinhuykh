@@ -273,7 +273,7 @@ foreach($_aDV as $_madv) {
 	$sl4 = 0;
 	$sl5 = 0;
 	while ($rowts = mysqli_fetch_array($queryts)) {
-		$sqlhm = "Select sodu,sotie from tblhaomon where TTQLTS =" . $rowts['TTQLTS'] . " and namhaomon = $nam";
+		$sqlhm = "Select sodu,sotien from tblhaomon where TTQLTS =" . $rowts['TTQLTS'] . " and namhaomon = $nam";
 		$qrsqlhm = mysqli_query($con, $sqlhm);
 		while ($rowhm = mysqli_fetch_array($qrsqlhm)) {
 			$kq = 0;
