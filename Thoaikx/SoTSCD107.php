@@ -502,7 +502,7 @@ foreach($_aDV as $_madv) {
 			$ts[$cs][17] = $ldotg;
 			if ($ngaythanggiam != "")
 				//$ts[$cs][19] = $row['NG'] + $tangst - $giamst - soduhm($row['TTQLTS'], $nam, $row['nsd'], $row['NG'] + $tangst - $giamst);
-				$ts[$cs][18] = $sotiengiam;
+				$ts[$cs][18] = $row['NG'] + $tangst - $giamst - sohmlk($row['TTQLTS'], $nam);
 			else
 				$ts[$cs][18] = 0;
 
@@ -512,7 +512,7 @@ foreach($_aDV as $_madv) {
 			$Tluyke += sohmlk($row['TTQLTS'], $nam);
 			if ($ngaythanggiam != "")
 				//$Tgiatricl += $row['NG'] + $tangst - $giamst - soduhm($row['TTQLTS'], $nam, $row['nsd'], $row['NG'] + $tangst - $giamst);
-				$Tgiatricl += $sotiengiam;
+				$Tgiatricl += $row['NG'] + $tangst - $giamst - sohmlk($row['TTQLTS'], $nam);
 			else
 				$Tgiatricl += 0;
 		}
