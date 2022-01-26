@@ -728,6 +728,13 @@ $(document).ready(function(){
 				}
 			}
 		}
+		if ($hinhthuc == "Điều chuyển ngoài hệ thống") {
+			$sqlup = "Update tblqlts Set XOA = 'DC' Where TTQLTS = '$TTQLTS'";
+			$qrsqlup = mysqli_query($con, $sqlup);
+			$sqltg = "insert into tbltanggiam (ngaytanggiam,TTQLTS,lydotanggiam,soluong,tanggiam,madonvi)" .
+				"values ('$ngaythang','$TTQLTS','Điều chuyển ngoài hệ thống','1','Điều chuyển','$ab')";
+			$qrsqltg = mysqli_query($con, $sqltg);
+		}
 		if ($hinhthuc == "Điều chuyển lại") {
 			$idts = "";
 			$sql = "Select IDTSC from tblqlts where TTQLTS = '$TTQLTS'";
@@ -836,6 +843,7 @@ $sql = "SELECT TTQLTS,chitiethinhthai,mataisan,tentaisan,tenchitiet FROM tblqlts
 										<option value='Thu hồi'>Thu hồi</option>
 										<option value='Bán'>Bán</option>
 										<option value='Điều chuyển'>Điều chuyển</option>
+										<option value='Điều chuyển ngoài hệ thống'>Điều chuyển ngoài hệ thống</option>
 										<option value='Thanh lý'>Thanh lý</option>
 										<option value='Tiêu hủy'>Tiêu hủy</option>
 										<option value='LD, liên kết'>LD, liên kết</option>
