@@ -181,13 +181,12 @@
 		global $ngaytach;
 		global $con;
 		$sohaomon = 0;
-
 		$sql = "select MAX(namhaomon), sotien,sodu,namhaomon,TTQLTS,TTTS from tblhaomon where namhaomon <= " . $ngaytach[2] . " and TTQLTS = " . $TTQLTS.
 			" and namhaomon in (select MAX(namhaomon) from tblhaomon where namhaomon <= " . $ngaytach[2] . " and TTQLTS = " . $TTQLTS.")";
 		$queryhm = mysqli_query($con, $sql);
 		while ($rowhm = mysqli_fetch_array($queryhm)) {
 			$sohaomon += $rowhm['sodu'];
-			//$sohaomon += $rowhm['sotien'];
+			$sohaomon += $rowhm['sotien'];
 		}
 		return $sohaomon;
 	}
