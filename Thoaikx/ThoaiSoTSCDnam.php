@@ -122,12 +122,6 @@
 								<span class='title'>Sổ tài sản cố định (S24-H)</span>
 							</a>		
 						</li>
-						<li class="active">
-							<a  href="/Thoaikx/ThoaiSoCTTSCD.php">
-								<i class="entypo-book-open"></i>
-								<span class='title'>Sổ chi tiết tài sản cố định (SCT_TSCD1)</span>
-							</a>
-						</li>
 						<li>
 							<a  href="/Thoaikx/ThoaiSoTSCD_NSD.php">
 								<i class="entypo-book-open"></i>
@@ -198,6 +192,12 @@
 								<span class='title'>Báo cáo kiểm kê tài sản cố định</span>
 							</a>
 							
+						</li>
+						<li class="active">
+							<a  href="/Thoaikx/ThoaiSoTSCDnam.php">
+								<i class="entypo-book-open"></i>
+								<span class='title'>Sổ TSCD tăng trong năm</span>
+							</a>
 						</li>
 					</ul>
 				</li>
@@ -560,10 +560,10 @@ $(document).ready(function(){
 <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
-			<h4 class="modal-title" style="text-align:center;"><strong>Sổ chi tiết tài sản cố định</strong></h4>
+			<h4 class="modal-title" style="text-align:center;"><strong>Sổ TSCD tăng trong năm</strong></h4>
 		</div>
 			<div class="modal-body">
-				<form name="thoai" role="form" method="Post" class="form-horizontal" onsubmit="return kt()" action="SoCTTSCD.php">
+				<form name="thoai" role="form" method="Post" class="form-horizontal" onsubmit="return kt()" action="BcTHTGTSCDdv.php">
 				<div class="form-group" <?php if (strlen($ma[0]) >= 16){echo "style='display:none';";}?>>
 					<div class="col-sm-6" <?php if (strlen($ma[0]) >= 6){echo "style='display:none';";}?>><label>Huyện:</label><select  name="huyen" class="form-control" id="huyen"  type="text">	
 					<option value=""></option>
@@ -686,9 +686,9 @@ function kt()
 
     function get_action() {		
 		if ($("input[name='ccdc']:checked").length == 1)
-			return "/Tienich/SoCTTSCD.php";
+			return "/Tienich/SoTSCDnam.php";
 		else
-			return "SoCTTSCD.php";
+			return "SoTSCDnam.php";
     }
 </script>
 <!----------- Footer ------------->

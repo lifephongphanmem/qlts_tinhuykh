@@ -187,6 +187,12 @@
 								<span class='title'>Báo cáo kiểm kê tài sản cố định</span>
 							</a>
 						</li>
+						<li >
+							<a  href="/Thoaikx/ThoaiSoTSCDnam.php">
+								<i class="entypo-book-open"></i>
+								<span class='title'>Sổ TSCD tăng trong năm</span>
+							</a>
+						</li>
 					</ul>
 				</li>
 				<li>
@@ -474,8 +480,11 @@
                         }
                         ?>>
                             <a  href="/Tienich/goptaikhoan.php">	<i class="entypo-install"></i>
-                                <span class='title'>Inport Excel</span>
+                                <span class='title'>Gộp tài khoản</span>
                             </a>
+							<a  href="/Tienich/xoatsdv.php">	<i class="entypo-install"></i>
+								<span class='title'>Xóa tài sản đơn vị</span>
+							</a>
                         </li>
 					</ul>
 				</li>
