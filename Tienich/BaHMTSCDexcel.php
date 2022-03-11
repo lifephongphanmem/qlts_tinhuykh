@@ -126,8 +126,7 @@ $tennhom="";
 $group1=0;
 $Tnguyengia = 0;
 $Thaomon = 0;
-$congNG = 0;
-$congHM =0;
+
 $dv = 0;
 for($i = 0; $i < $cs; $i++) {
 	$Tnguyengia += $tg[$i][3];
@@ -144,11 +143,15 @@ for($i = 0; $i < $cs; $i++) {
 	$tennhom = $tg[$i][2];
 	if ($tennhom != $tennhomsau) {
 		$group1 = $index;
+		$congNG = 0;
+		$congHM =0;
 		$objPHPExcel->setActiveSheetIndex(0)
 			->setCellValue('B' . $index, $tg[$i][2]);
 		dinhdangBI($objPHPExcel, 'A' . $index, 'E' . $index, 1, 'BI');
 		$index++;
 	}
+	$congNG += $tg[$i][3];
+	$congHM += $tg[$i][5];
 	$objPHPExcel->setActiveSheetIndex(0)
 		->setCellValue('A' . $index, $i + 1)
 		->setCellValue('B' . $index, $tg[$i][1])
@@ -156,9 +159,14 @@ for($i = 0; $i < $cs; $i++) {
 		->setCellValue('D' . $index, $tg[$i][4])
 		->setCellValue('E' . $index, $tg[$i][5]);
 	$tennhomsau = $tg[$i][2];
+	/*
 	$objPHPExcel->setActiveSheetIndex(0)
 		->setCellValue('C' . $group1, "=Sum(C" . ($group1 + 1) . ":C" . $index . ")")
 		->setCellValue('E' . $group1, "=Sum(E" . ($group1 + 1) . ":E" . $index . ")");
+	*/
+	$objPHPExcel->setActiveSheetIndex(0)
+		->setCellValue('C' . $group1, $congNG)
+		->setCellValue('E' . $group1, $congHM);
 	$index++;
 	if(($i +1)<$cs) {
 		if ($tendonvi != $tg[$i + 1][6]) {
