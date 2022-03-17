@@ -589,7 +589,7 @@ $(document).ready(function(){
 	function chekts($idts,$nam)
 	{
 		global $con;
-		$sql = "Select TTQLTS from tbltanggiam WHERE tanggiam like 'Điều chuyển%' and  TTQLTS = " . $idts . " and year(ngaytanggiam) = " . $nam;
+		$sql = "Select TTQLTS from tbltanggiam WHERE tanggiam like 'Điều chuyển%' and  TTQLTS = " . $idts . " and year(ngaytanggiam) < " . $nam;
 		$qrsql = mysqli_query($con, $sql);
 		while($row = mysqli_fetch_array($qrsql)) {
 			return true;
