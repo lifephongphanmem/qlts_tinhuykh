@@ -185,9 +185,19 @@ $index=9;$tennhomsau = "";$tennhom="";$group1=0;$tennhomsau1 = "";$tennhom1="";$
 $grten = 0;
 $grstart = 0;
 $grend = 0;
+$cong7 = 0;
+$cong8 = 0;
+$cong9 = 0;
+$cong11 = 0;
+$cong12 = 0;
 for($i = 0; $i < $cs; $i++) {
 	$tennhom = $kk[$i][4];
 	if ($tennhom != $tennhomsau) {
+		$cong7 = 0;
+		$cong8 = 0;
+		$cong9 = 0;
+		$cong11 = 0;
+		$cong12 = 0;
 		$sogr1 = $sogr1 + 1;
 		$objPHPExcel->setActiveSheetIndex(0)
 			->setCellValue('B' . $index, $kk[$i][4])->mergeCells('B' . $index . ':K' . $index);
@@ -200,7 +210,7 @@ for($i = 0; $i < $cs; $i++) {
 		$grten = $index;
 		$objPHPExcel->setActiveSheetIndex(0)
 			->setCellValue('B' . $index, $kk[$i][0]);
-		dinhdangBI($objPHPExcel, 'A' . $index, 'K' . $index , 1, 'BI');
+		dinhdangBI($objPHPExcel, 'A' . $index, 'L' . $index , 1, 'BI');
 		$index++;
 		$sttn1 = $sttn1 + 1;
 		$group1 = $index + $sttn1;
@@ -219,6 +229,11 @@ for($i = 0; $i < $cs; $i++) {
 		->setCellValue('J' . $index, $kk[$i][10])
 		->setCellValue('K' . $index, $kk[$i][11])
 		->setCellValue('L' . $index, $kk[$i][12]);
+	$cong7 += kieudouble($kk[$i][7]);
+	$cong8 += kieudouble($kk[$i][8]);
+	$cong9 += kieudouble($kk[$i][9]);
+	$cong11 += kieudouble($kk[$i][11]);
+	$cong12 += kieudouble($kk[$i][12]);
 	$tong7 = $tong7 + kieudouble($kk[$i][7]);
 	$tong8 = $tong8 + kieudouble($kk[$i][8]);
 	$tong9 = $tong9 + kieudouble($kk[$i][9]);
@@ -228,11 +243,11 @@ for($i = 0; $i < $cs; $i++) {
 	$tennhomsau1 = $kk[$i][0];
 	$grend = $index;
 	$objPHPExcel->setActiveSheetIndex(0)
-		->setCellValue('G' . $grten, "=Sum(G" . $grstart . ":G" . $grend . ")")
-		->setCellValue('H' . $grten, "=Sum(H" . $grstart . ":H" . $grend . ")")
-		->setCellValue('I' . $grten, "=Sum(I" . $grstart . ":I" . $grend . ")")
-		->setCellValue('K' . $grten, "=Sum(K" . $grstart . ":K" . $grend . ")")
-		->setCellValue('L' . $grten, "=Sum(L" . $grstart . ":L" . $grend . ")");
+		->setCellValue('G' . $grten, $cong7)
+		->setCellValue('H' . $grten, $cong8)
+		->setCellValue('I' . $grten, $cong9)
+		->setCellValue('K' . $grten, $cong11)
+		->setCellValue('L' . $grten, $cong12);
 	$index++;
 }
 dulieumotcot($objPHPExcel,'B'.$index,'Tổng cộng','B','Time New Roman',10,'','','',0,'');
