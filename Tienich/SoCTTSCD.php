@@ -283,7 +283,7 @@ foreach($_aDV as $_madv) {
 		$tg[$cs][7] = ngaythang($rowts['ngaysudung']);
 		$tg[$cs][8] = $rowts['sonamsd'];
 		$tg[$cs][9] = $rowts['phantram'];
-		$tg[$cs][10] = $rowts['NG'];
+		$tg[$cs][10] = $rowts['NG'] + tinhtoan($rowts['TTQLTS'], "Cuối kỳ", "Số tiền", "");
 		$tg[$cs][11] = 0;
 		$tg[$cs][12] = 0;
 		$tg[$cs][13] = 0;
@@ -295,7 +295,7 @@ foreach($_aDV as $_madv) {
 			$tg[$cs][11] = $rowhm['sodu'];
 			$tg[$cs][12] = $rowhm['sotien'];
 			$tg[$cs][13] = $rowhm['sotien'] + $rowhm['sodu'];
-			$tg[$cs][14] = $rowts['NG'] - $rowhm['sotien'] - $rowhm['sodu'];
+			$tg[$cs][14] = $rowts['NG'] + tinhtoan($rowts['TTQLTS'], "Cuối kỳ", "Số tiền", "") - $rowhm['sotien'] - $rowhm['sodu'];
 		}
 
 		$cs = $cs + 1;
