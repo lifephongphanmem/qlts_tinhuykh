@@ -566,7 +566,7 @@ $(document).ready(function(){
 			$tangst = 0;
 			$giamst = 0;
 			$sql = "Select ngansach,nguonkhac,tanggiam,sotien from tbltanggiam" .
-				" where (tanggiam not like 'Thanh lý%' or tanggiam not like 'Thu hồi%' or tanggiam not like 'Điều chuyển%') and TTQLTS = " . $idts . " and year(ngaytanggiam) <= " . $nam;
+				" where (tanggiam not like 'Thanh lý%' or tanggiam not like 'Thu hồi%' or tanggiam not like 'Điều chuyển%') and TTQLTS = " . $idts . " and year(ngaytanggiam) < " . $nam;
 			$qrsql = mysqli_query($con, $sql);
 			while ($row = mysqli_fetch_array($qrsql)) {
 				if ($row['tanggiam'] == "Tăng")
