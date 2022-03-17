@@ -566,7 +566,7 @@ $(document).ready(function(){
 			$tangst = 0;
 			$giamst = 0;
 			$sql = "Select ngansach,nguonkhac,tanggiam,sotien from tbltanggiam" .
-				" where (tanggiam not like 'Thanh lý%' or tanggiam not like 'Thu hồi%' or tanggiam not like 'Điều chuyển%') and TTQLTS = " . $idts . " and year(ngaytanggiam) < " . $nam;
+				" where (tanggiam not like 'Thanh lý%' or tanggiam not like 'Thu hồi%' or tanggiam not like 'Điều chuyển%') and TTQLTS = " . $idts . " and year(ngaytanggiam) <= " . $nam;
 			$qrsql = mysqli_query($con, $sql);
 			while ($row = mysqli_fetch_array($qrsql)) {
 				if ($row['tanggiam'] == "Tăng")
@@ -589,7 +589,7 @@ $(document).ready(function(){
 	function chekts($idts,$nam)
 	{
 		global $con;
-		$sql = "Select TTQLTS from tbltanggiam WHERE tanggiam like 'Điều chuyển%' and  TTQLTS = " . $idts . " and year(ngaytanggiam) < " . $nam;
+		$sql = "Select TTQLTS from tbltanggiam WHERE tanggiam like 'Điều chuyển%' and  TTQLTS = " . $idts . " and year(ngaytanggiam) <= " . $nam;
 		$qrsql = mysqli_query($con, $sql);
 		while($row = mysqli_fetch_array($qrsql)) {
 			return true;
@@ -802,7 +802,7 @@ if (isset($_POST['sua']))
 	$ngaydk = doingay($_POST['ngaynhap']);
 	$namhm = $_POST['namhaomon'];	
 	$sql = "Select TTQLTS,phantram,(ngansach+nguonkhac) as NG,year(ngaysudung) as nsd from tblqlts Where madonvi = '$ma[0]' and ngaysudung <= '$ngaydk' and phantram > 0".
-	" and TTQLTS Not in (Select TTQLTS From tblhaomon Where namhaomon = ".$_POST['namhaomon']. ") and TTQLTS Not in (Select TTQLTS From tbldenghi Where hinhthuc = 'Thanh lý' or hinhthuc = 'Bán' or hinhthuc = 'Điều chuyển')";
+	" and TTQLTS Not in (Select TTQLTS From tblhaomon Where namhaomon = ".$_POST['namhaomon']. ") and TTQLTS Not in (Select TTQLTS From tbldenghi Where (hinhthuc = 'Thanh lý' or hinhthuc = 'Bán' or hinhthuc = 'Điều chuyển') and year(ngaythang)< $namhm)";
 	$hmnam = 0;$sodu=0;
 	$kq = mysqli_query($con,$sql);
 	while($row=mysqli_fetch_array($kq)){
