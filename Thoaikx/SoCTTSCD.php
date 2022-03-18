@@ -366,7 +366,7 @@ foreach($_aDV as $_madv) {
 	$nhoms3 = 0;
 	$nhoms4 = 0;
 	$nhoms5 = 0;
-
+	$tennhomsau ="";
 	$j = 0;
 	$stt = 0;
 	echo "<tr style='vertical-align:top;'>";
@@ -400,7 +400,7 @@ foreach($_aDV as $_madv) {
 				$nhoms4 = 0;
 				$nhoms5 = 0;
 				$j = 0;
-				for ($j = 1; $j < $cs; $j++) {
+				for ($j = 0; $j < $cs; $j++) {
 					if ($tg[$j][4] == $tennhom) {
 						$nhoms1 += $tg[$j][10];
 						$nhoms2 += $tg[$j][11];
