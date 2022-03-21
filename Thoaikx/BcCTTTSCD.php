@@ -495,7 +495,7 @@ foreach($_aDV as $_madv) {
 	</tr>
 	<tr>
 		<td style="text-align: center;: center; font-weight: bold;">Người lập biểu</td>
-		<td style="text-align: center;: center; font-weight: bold;">Trưởng phòng</td>
+		<td style="text-align: center;: center; font-weight: bold;">Kế toán trưởng</td>
 		<td style="text-align: center; font-weight: bold;"> Thủ trưởng đơn vị</td>
 	</tr>
 

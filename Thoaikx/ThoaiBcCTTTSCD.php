@@ -686,7 +686,7 @@ function kt()
 
     function get_action() {		
 		if ($("input[name='ccdc']:checked").length == 1)
-			return "/Tienich/BcTHTGTSCDdvexcel.php";
+			return "/Tienich/BcCTTTSCD.php";
 		else
 			return "BcCTTTSCD.php";
     }
