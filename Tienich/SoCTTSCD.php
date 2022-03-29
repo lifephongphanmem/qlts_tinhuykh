@@ -253,7 +253,7 @@ foreach($_aDV as $_madv) {
 		}
 		$sqlts = $sqlts . ")";
 	}
-	$sqlts = $sqlts . " and tblqlts.TTQLTS not in (select TTQLTS from tbldenghi where (hinhthuc  = 'Thanh lý' or hinhthuc  = 'Điều chuyển' or hinhthuc  = 'Thu hồi' or hinhthuc  = 'Bán' or hinhthuc  = 'Tiêu hủy') and year(ngaythang) < " . $nam . ")";
+	$sqlts = $sqlts . " and tblqlts.TTQLTS not in (select TTQLTS from tbldenghi where (hinhthuc  = 'Thanh lý' or hinhthuc  = 'Điều chuyển' or hinhthuc  = 'Thu hồi' or hinhthuc  = 'Bán' or hinhthuc  = 'Tiêu hủy') and year(ngaythang) <= " . $nam . ")";
 	$sqlts = $sqlts . " order by tbldanhsachqd32.ttsx";
 	//echo $sqlts;
 	$queryts = mysqli_query($con, $sqlts);
