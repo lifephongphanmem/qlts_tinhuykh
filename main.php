@@ -193,6 +193,12 @@
 								<span class='title'>Sổ TSCD tăng trong năm</span>
 							</a>
 						</li>
+						<li >
+							<a  href="/Thoaikx/ThoaiBaoCaoM03_TT392021.php">
+								<i class="entypo-book-open"></i>
+								<span class='title'>Báo cáo cung cấp thông tin tài sản (Mẫu C03/CCTT)</span>
+							</a>
+						</li>
 					</ul>
 				</li>
 				<li>
