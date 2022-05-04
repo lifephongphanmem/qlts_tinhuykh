@@ -40,35 +40,45 @@
 <body>
 <?php
 require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
+$ngaythang = date('Y-m-d');
 $phanloai = "";
-$tungay = "";
-$denngay = "";
-$madv = "";
-$noidung = "";
-$tgsc = "";
 $nam = "";
+$mah = "";
+$madv = "";
+$ts5 = "No";
+$noidung = "";
+$hmtd = "No";
+$hmht = "No";
 if (isset($_POST['create'])) {
     if ($_POST['sobg'] != "")
         $phanloai = explode('>', $_POST['sobg']);
     $nam = $_POST['nam'];
+    $mah = $_POST['huyen'];
+    if (isset($_POST['ts5']))
+        $ts5 = $_POST['ts5'];
     $madv = explode('>', $_POST['MADV']);
-    $msdv = $madv[0];
+    $msdv = $_POST['msdv'];
     if ($_POST['donvi'] != "")
         $msdv = $_POST['donvi'];
-    if (isset($_POST['tgsc']))
-        $tgsc = true;
-    else
-        $tgsc = false;
+    if (isset($_POST['noidung']))
+        $noidung = $_POST['noidung'];
+    if (isset($_POST['hmtd']))
+        $hmtd = $_POST['hmtd'];
+    if (isset($_POST['hmht']))
+        $hmht = $_POST['hmht'];
 }
-if (isset($_POST['noidung']))
-    $noidung = $_POST['noidung'];
-$machuong = "";
-$masons = "";
-$sql = "Select machuong,maqhns from thongtindonvi where madonvi = '$madv[0]'";
+$tendv = "";
+$nlb = "";
+$ktt = "";
+$maqhns = "";
+$sql = "Select tendv,nlb,ptkt,maqhns,ttdv From thongtindonvi WHERE madonvi = '$msdv'";
 $qrsql = mysqli_query($con, $sql);
 while ($row = mysqli_fetch_array($qrsql)) {
-    $machuong = $row['machuong'];
-    $masons = $row['maqhns'];
+    $tendv = $row['tendv'];
+    $nlb = $row['nlb'];
+    $ktt = $row['ptkt'];
+    $ttdv = $row['ttdv'];
+    $maqhns = $row['maqhns'];
 }
 ?>
 <table cellspacing="0" cellpadding="0" border="0">
@@ -178,276 +188,292 @@ $arvhcl = array(
 );
 
 //Nguyên giá
-function nguyengia(&$arhh, &$arvh, &$arhhcl, &$arvhcl)
+function nguyengia(&$arhh, &$arvh, &$arhhcl, &$arvhcl, $_aDV)
 {
     global $con;
     global $nam;
-    $sql = "Select ngansach + nguonkhac as nguyengia, YEAR(ngaysudung) as nam, tbldanhsachqd32.hinhthaitaisan,tbldanhsachqd32.dacdiemtaisan
- 			From tblqlts INNER JOIN tbldanhsachqd32 ON tblqlts.mataisan = tbldanhsachqd32.mataisanqd32 WHERE YEAR(ngaysudung) <= $nam";
-    $qrsql = mysqli_query($con, $sql);
-    while ($row = mysqli_fetch_array($qrsql)) {
-        if ($row['nam'] < $nam) {
-            $i = 0;
-            if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] < $nam) {
-                $arhh[$i]['nha'] += $row['nguyengia'];
-                $arhhcl[$i]['nha'] += $row['nguyengia'];
+    foreach ($_aDV as $value) {
+        $sql = "Select ngansach + nguonkhac as nguyengia, YEAR(ngaysudung) as nam, tbldanhsachqd32.hinhthaitaisan,tbldanhsachqd32.dacdiemtaisan
+ 			From tblqlts INNER JOIN tbldanhsachqd32 ON tblqlts.mataisan = tbldanhsachqd32.mataisanqd32 WHERE YEAR(ngaysudung) <= $nam
+ 			AND tblqlts.madonvi = '$value'";
+        $qrsql = mysqli_query($con, $sql);
+        while ($row = mysqli_fetch_array($qrsql)) {
+            if ($row['nam'] < $nam) {
+                $i = 0;
+                if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] < $nam) {
+                    $arhh[$i]['nha'] += $row['nguyengia'];
+                    $arhhcl[$i]['nha'] += $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] < $nam) {
+                    $arhh[$i]['ptvt'] += $row['nguyengia'];
+                    $arhhcl[$i]['ptvt'] += $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
+                        || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] < $nam && $row['dacdiemtaisan'] == 'Hữu hình'
+                ) {
+                    $arhh[$i]['khac'] += $row['nguyengia'];
+                    $arhhcl[$i]['khac'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] < $nam) {
+                    $arvh[$i]['dat'] += $row['nguyengia'];
+                    $arvhcl[$i]['dat'] += $row['nguyengia'];
+                }
+                if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] < $nam) {
+                    $arvh[$i]['banquyen'] += $row['nguyengia'];
+                    $arvhcl[$i]['banquyen'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] < $nam) {
+                    $arvh[$i]['phanmem'] += $row['nguyengia'];
+                    $arvhcl[$i]['phanmem'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] < $nam) {
+                    $arvh[$i]['khac'] += $row['nguyengia'];
+                    $arvhcl[$i]['khac'] += $row['nguyengia'];
+                }
             }
-            if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] < $nam) {
-                $arhh[$i]['ptvt'] += $row['nguyengia'];
-                $arhhcl[$i]['ptvt'] += $row['nguyengia'];
-            }
-            if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
-                    || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] < $nam && $row['dacdiemtaisan'] == 'Hữu hình'
-            ) {
-                $arhh[$i]['khac'] += $row['nguyengia'];
-                $arhhcl[$i]['khac'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] < $nam) {
-                $arvh[$i]['dat'] += $row['nguyengia'];
-                $arvhcl[$i]['dat'] += $row['nguyengia'];
-            }
-            if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] < $nam) {
-                $arvh[$i]['banquyen'] += $row['nguyengia'];
-                $arvhcl[$i]['banquyen'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] < $nam) {
-                $arvh[$i]['phanmem'] += $row['nguyengia'];
-                $arvhcl[$i]['phanmem'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] < $nam) {
-                $arvh[$i]['khac'] += $row['nguyengia'];
-                $arvhcl[$i]['khac'] += $row['nguyengia'];
-            }
-        }
-        if ($row['nam'] == $nam) {
-            $i = 1;
-            if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] == $nam) {
-                $arhh[$i]['nha'] += $row['nguyengia'];
-            }
-            if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] == $nam) {
-                $arhh[$i]['ptvt'] += $row['nguyengia'];
-            }
-            if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
-                    || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] == $nam && $row['dacdiemtaisan'] == 'Hữu hình'
-            ) {
-                $arhh[$i]['khac'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] == $nam) {
-                $arvh[$i]['dat'] += $row['nguyengia'];
-            }
-            if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] == $nam) {
-                $arvh[$i]['banquyen'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] == $nam) {
-                $arvh[$i]['phanmem'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] == $nam) {
-                $arvh[$i]['khac'] += $row['nguyengia'];
+            if ($row['nam'] == $nam) {
+                $i = 1;
+                if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] == $nam) {
+                    $arhh[$i]['nha'] += $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] == $nam) {
+                    $arhh[$i]['ptvt'] += $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
+                        || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] == $nam && $row['dacdiemtaisan'] == 'Hữu hình'
+                ) {
+                    $arhh[$i]['khac'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] == $nam) {
+                    $arvh[$i]['dat'] += $row['nguyengia'];
+                }
+                if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] == $nam) {
+                    $arvh[$i]['banquyen'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] == $nam) {
+                    $arvh[$i]['phanmem'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] == $nam) {
+                    $arvh[$i]['khac'] += $row['nguyengia'];
+                }
             }
         }
     }
 }
 
-function tanggiamts(&$arhh, &$arvh, &$arhhcl, &$arvhcl)
+function tanggiamts(&$arhh, &$arvh, &$arhhcl, &$arvhcl, $_aDV)
 {
     global $con;
     global $nam;
-    $sql = "Select tbltanggiam.sotien as nguyengia, YEAR(ngaytanggiam) as nam, tbldanhsachqd32.hinhthaitaisan,tbldanhsachqd32.dacdiemtaisan,tbltanggiam.tanggiam
+    foreach ($_aDV as $value) {
+        $sql = "Select tbltanggiam.sotien as nguyengia, YEAR(ngaytanggiam) as nam, tbldanhsachqd32.hinhthaitaisan,tbldanhsachqd32.dacdiemtaisan,tbltanggiam.tanggiam
  			From tbltanggiam INNER JOIN tblqlts ON tbltanggiam.TTQLTS = tblqlts.TTQLTS  INNER JOIN tbldanhsachqd32 ON tblqlts.mataisan = tbldanhsachqd32.mataisanqd32
- 			WHERE YEAR(ngaytanggiam) <= $nam";
-    $qrsql = mysqli_query($con, $sql);
-    while ($row = mysqli_fetch_array($qrsql)) {
-        if ($row['nam'] < $nam && $row['tanggiam'] == 'Tăng') {
-            $i = 0;
-            if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] < $nam) {
-                $arhh[$i]['nha'] += $row['nguyengia'];
-                $arhhcl[$i]['nha'] += $row['nguyengia'];
+ 			WHERE YEAR(ngaytanggiam) <= $nam AND tblqlts.madonvi = '$value'";
+        $qrsql = mysqli_query($con, $sql);
+        while ($row = mysqli_fetch_array($qrsql)) {
+            if ($row['nam'] < $nam && $row['tanggiam'] == 'Tăng') {
+                $i = 0;
+                if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] < $nam) {
+                    $arhh[$i]['nha'] += $row['nguyengia'];
+                    $arhhcl[$i]['nha'] += $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] < $nam) {
+                    $arhh[$i]['ptvt'] += $row['nguyengia'];
+                    $arhhcl[$i]['ptvt'] += $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
+                        || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] < $nam && $row['dacdiemtaisan'] == 'Hữu hình'
+                ) {
+                    $arhh[$i]['khac'] += $row['nguyengia'];
+                    $arhhcl[$i]['khac'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] < $nam) {
+                    $arvh[$i]['dat'] += $row['nguyengia'];
+                    $arvhcl[$i]['dat'] += $row['nguyengia'];
+                }
+                if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] < $nam) {
+                    $arvh[$i]['banquyen'] += $row['nguyengia'];
+                    $arvhcl[$i]['banquyen'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] < $nam) {
+                    $arvh[$i]['phanmem'] += $row['nguyengia'];
+                    $arvhcl[$i]['phanmem'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] < $nam) {
+                    $arvh[$i]['khac'] += $row['nguyengia'];
+                    $arvhcl[$i]['khac'] += $row['nguyengia'];
+                }
             }
-            if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] < $nam) {
-                $arhh[$i]['ptvt'] += $row['nguyengia'];
-                $arhhcl[$i]['ptvt'] += $row['nguyengia'];
+            if ($row['nam'] < $nam && $row['tanggiam'] == 'Giảm') {
+                $i = 0;
+                if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] < $nam) {
+                    $arhh[$i]['nha'] -= $row['nguyengia'];
+                    $arhhcl[$i]['nha'] += $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] < $nam) {
+                    $arhh[$i]['ptvt'] -= $row['nguyengia'];
+                    $arhhcl[$i]['ptvt'] += $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
+                        || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] < $nam && $row['dacdiemtaisan'] == 'Hữu hình'
+                ) {
+                    $arhh[$i]['khac'] -= $row['nguyengia'];
+                    $arhhcl[$i]['khac'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] < $nam) {
+                    $arvh[$i]['dat'] -= $row['nguyengia'];
+                    $arvhcl[$i]['dat'] += $row['nguyengia'];
+                }
+                if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] < $nam) {
+                    $arvh[$i]['banquyen'] -= $row['nguyengia'];
+                    $arvhcl[$i]['banquyen'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] < $nam) {
+                    $arvh[$i]['phanmem'] -= $row['nguyengia'];
+                    $arvhcl[$i]['phanmem'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] < $nam) {
+                    $arvh[$i]['khac'] -= $row['nguyengia'];
+                    $arvhcl[$i]['khac'] += $row['nguyengia'];
+                }
             }
-            if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
-                    || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] < $nam && $row['dacdiemtaisan'] == 'Hữu hình'
-            ) {
-                $arhh[$i]['khac'] += $row['nguyengia'];
-                $arhhcl[$i]['khac'] += $row['nguyengia'];
+            if ($row['nam'] == $nam && $row['tanggiam'] == 'Tăng') {
+                $i = 1;
+                if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] == $nam) {
+                    $arhh[$i]['nha'] += $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] == $nam) {
+                    $arhh[$i]['ptvt'] += $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
+                        || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] == $nam && $row['dacdiemtaisan'] == 'Hữu hình'
+                ) {
+                    $arhh[$i]['khac'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] == $nam) {
+                    $arvh[$i]['dat'] += $row['nguyengia'];
+                }
+                if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] == $nam) {
+                    $arvh[$i]['banquyen'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] == $nam) {
+                    $arvh[$i]['phanmem'] += $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] == $nam) {
+                    $arvh[$i]['khac'] += $row['nguyengia'];
+                }
             }
-            if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] < $nam) {
-                $arvh[$i]['dat'] += $row['nguyengia'];
-                $arvhcl[$i]['dat'] += $row['nguyengia'];
-            }
-            if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] < $nam) {
-                $arvh[$i]['banquyen'] += $row['nguyengia'];
-                $arvhcl[$i]['banquyen'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] < $nam) {
-                $arvh[$i]['phanmem'] += $row['nguyengia'];
-                $arvhcl[$i]['phanmem'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] < $nam) {
-                $arvh[$i]['khac'] += $row['nguyengia'];
-                $arvhcl[$i]['khac'] += $row['nguyengia'];
-            }
-        }
-        if ($row['nam'] < $nam && $row['tanggiam'] == 'Giảm') {
-            $i = 0;
-            if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] < $nam) {
-                $arhh[$i]['nha'] -= $row['nguyengia'];
-                $arhhcl[$i]['nha'] += $row['nguyengia'];
-            }
-            if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] < $nam) {
-                $arhh[$i]['ptvt'] -= $row['nguyengia'];
-                $arhhcl[$i]['ptvt'] += $row['nguyengia'];
-            }
-            if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
-                    || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] < $nam && $row['dacdiemtaisan'] == 'Hữu hình'
-            ) {
-                $arhh[$i]['khac'] -= $row['nguyengia'];
-                $arhhcl[$i]['khac'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] < $nam) {
-                $arvh[$i]['dat'] -= $row['nguyengia'];
-                $arvhcl[$i]['dat'] += $row['nguyengia'];
-            }
-            if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] < $nam) {
-                $arvh[$i]['banquyen'] -= $row['nguyengia'];
-                $arvhcl[$i]['banquyen'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] < $nam) {
-                $arvh[$i]['phanmem'] -= $row['nguyengia'];
-                $arvhcl[$i]['phanmem'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] < $nam) {
-                $arvh[$i]['khac'] -= $row['nguyengia'];
-                $arvhcl[$i]['khac'] += $row['nguyengia'];
-            }
-        }
-        if ($row['nam'] == $nam && $row['tanggiam'] == 'Tăng') {
-            $i = 1;
-            if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] == $nam) {
-                $arhh[$i]['nha'] += $row['nguyengia'];
-            }
-            if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] == $nam) {
-                $arhh[$i]['ptvt'] += $row['nguyengia'];
-            }
-            if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
-                    || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] == $nam && $row['dacdiemtaisan'] == 'Hữu hình'
-            ) {
-                $arhh[$i]['khac'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] == $nam) {
-                $arvh[$i]['dat'] += $row['nguyengia'];
-            }
-            if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] == $nam) {
-                $arvh[$i]['banquyen'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] == $nam) {
-                $arvh[$i]['phanmem'] += $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] == $nam) {
-                $arvh[$i]['khac'] += $row['nguyengia'];
-            }
-        }
-        if ($row['nam'] == $nam && $row['tanggiam'] == 'Giảm') {
-            $i = 2;
-            if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] < $nam) {
-                $arhh[$i]['nha'] -= $row['nguyengia'];
-            }
-            if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] < $nam) {
-                $arhh[$i]['ptvt'] -= $row['nguyengia'];
-            }
-            if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
-                    || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] < $nam && $row['dacdiemtaisan'] == 'Hữu hình'
-            ) {
-                $arhh[$i]['khac'] -= $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] < $nam) {
-                $arvh[$i]['dat'] -= $row['nguyengia'];
-            }
-            if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] < $nam) {
-                $arvh[$i]['banquyen'] -= $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] < $nam) {
-                $arvh[$i]['phanmem'] -= $row['nguyengia'];
-            }
-            if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] < $nam) {
-                $arvh[$i]['khac'] -= $row['nguyengia'];
+            if ($row['nam'] == $nam && $row['tanggiam'] == 'Giảm') {
+                $i = 2;
+                if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') && $row['nam'] < $nam) {
+                    $arhh[$i]['nha'] -= $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') && $row['nam'] < $nam) {
+                    $arhh[$i]['ptvt'] -= $row['nguyengia'];
+                }
+                if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
+                        || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['nam'] < $nam && $row['dacdiemtaisan'] == 'Hữu hình'
+                ) {
+                    $arhh[$i]['khac'] -= $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất' && $row['nam'] < $nam) {
+                    $arvh[$i]['dat'] -= $row['nguyengia'];
+                }
+                if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất' && $row['nam'] < $nam) {
+                    $arvh[$i]['banquyen'] -= $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng' && $row['nam'] < $nam) {
+                    $arvh[$i]['phanmem'] -= $row['nguyengia'];
+                }
+                if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác' && $row['nam'] < $nam) {
+                    $arvh[$i]['khac'] -= $row['nguyengia'];
+                }
             }
         }
     }
+
 }
 
-function haomonts(&$arhhhm, &$arvhhm, &$arhhcl, &$arvhcl)
+function haomonts(&$arhhhm, &$arvhhm, &$arhhcl, &$arvhcl, $_aDV)
 {
     global $con;
     global $nam;
-    $sql = "Select tblhaomon.sodu, tblhaomon.sotien, namhaomon as nam, tbldanhsachqd32.hinhthaitaisan,tbldanhsachqd32.dacdiemtaisan
+    foreach ($_aDV as $value) {
+        $sql = "Select tblhaomon.sodu, tblhaomon.sotien, namhaomon as nam, tbldanhsachqd32.hinhthaitaisan,tbldanhsachqd32.dacdiemtaisan
  			From tblhaomon INNER JOIN tblqlts ON tblhaomon.TTQLTS = tblqlts.TTQLTS  INNER JOIN tbldanhsachqd32 ON tblqlts.mataisan = tbldanhsachqd32.mataisanqd32
- 			WHERE namhaomon = $nam";
-    $qrsql = mysqli_query($con, $sql);
-    while ($row = mysqli_fetch_array($qrsql)) {
-        $i = 0;
-        if ($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') {
-            $arhhhm[$i]['nha'] += $row['sodu'];
-            $arhhcl[$i]['nha'] -= $row['sodu'];
-        }
-        if ($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') {
-            $arhhhm[$i]['ptvt'] += $row['sodu'];
-            $arhhcl[$i]['ptvt'] -= $row['sodu'];
-        }
-        if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
-                || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['dacdiemtaisan'] == 'Hữu hình'
-        ) {
-            $arhhhm[$i]['khac'] += $row['sodu'];
-            $arhhcl[$i]['khac'] -= $row['sodu'];
-        }
-        if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất') {
-            $arvhhm[$i]['dat'] += $row['sodu'];
-            $arvhcl[$i]['dat'] -= $row['sodu'];
-        }
-        if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất') {
-            $arvhhm[$i]['banquyen'] += $row['sodu'];
-            $arvhcl[$i]['banquyen'] -= $row['sodu'];
-        }
-        if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng') {
-            $arvhhm[$i]['phanmem'] += $row['sodu'];
-            $arvhcl[$i]['phanmem'] -= $row['sodu'];
-        }
-        if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác') {
-            $arvhhm[$i]['khac'] += $row['sodu'];
-            $arvhcl[$i]['khac'] -= $row['sodu'];
-        }
-        $i = 1;
-        if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc')) {
-            $arhhhm[$i]['nha'] += $row['sotien'];
-        }
-        if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)')) {
-            $arhhhm[$i]['ptvt'] += $row['sotien'];
-        }
-        if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
-                || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['dacdiemtaisan'] == 'Hữu hình'
-        ) {
-            $arhhhm[$i]['khac'] += $row['sotien'];
-        }
-        if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất') {
-            $arvhhm[$i]['dat'] += $row['sotien'];
-        }
-        if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất') {
-            $arvhhm[$i]['banquyen'] += $row['sotien'];
-        }
-        if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng') {
-            $arvhhm[$i]['phanmem'] += $row['sotien'];
-        }
-        if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác') {
-            $arvhhm[$i]['khac'] += $row['sotien'];
+ 			WHERE namhaomon = $nam AND tblqlts.madonvi = '$value'";
+        $qrsql = mysqli_query($con, $sql);
+        while ($row = mysqli_fetch_array($qrsql)) {
+            $i = 0;
+            if ($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc') {
+                $arhhhm[$i]['nha'] += $row['sodu'];
+                $arhhcl[$i]['nha'] -= $row['sodu'];
+            }
+            if ($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)') {
+                $arhhhm[$i]['ptvt'] += $row['sodu'];
+                $arhhcl[$i]['ptvt'] -= $row['sodu'];
+            }
+            if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
+                    || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['dacdiemtaisan'] == 'Hữu hình'
+            ) {
+                $arhhhm[$i]['khac'] += $row['sodu'];
+                $arhhcl[$i]['khac'] -= $row['sodu'];
+            }
+            if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất') {
+                $arvhhm[$i]['dat'] += $row['sodu'];
+                $arvhcl[$i]['dat'] -= $row['sodu'];
+            }
+            if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất') {
+                $arvhhm[$i]['banquyen'] += $row['sodu'];
+                $arvhcl[$i]['banquyen'] -= $row['sodu'];
+            }
+            if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng') {
+                $arvhhm[$i]['phanmem'] += $row['sodu'];
+                $arvhcl[$i]['phanmem'] -= $row['sodu'];
+            }
+            if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác') {
+                $arvhhm[$i]['khac'] += $row['sodu'];
+                $arvhcl[$i]['khac'] -= $row['sodu'];
+            }
+            $i = 1;
+            if (($row['hinhthaitaisan'] == 'Nhà, công trình xây dựng' || $row['hinhthaitaisan'] == 'Vật kiến trúc')) {
+                $arhhhm[$i]['nha'] += $row['sotien'];
+            }
+            if (($row['hinhthaitaisan'] == 'Xe ô tô' || $row['hinhthaitaisan'] == 'Phương tiện vận tải khác (ngoài xe ô tô)')) {
+                $arhhhm[$i]['ptvt'] += $row['sotien'];
+            }
+            if (($row['hinhthaitaisan'] == 'Máy móc, thiết bị' || $row['hinhthaitaisan'] == 'Cây lâu năm, súc vật làm việc và/hoặc cho sản phẩm'
+                    || $row['hinhthaitaisan'] == 'Tài sản cố định hữu hình khác') && $row['dacdiemtaisan'] == 'Hữu hình'
+            ) {
+                $arhhhm[$i]['khac'] += $row['sotien'];
+            }
+            if ($row['hinhthaitaisan'] == 'Quyền sử dụng đất') {
+                $arvhhm[$i]['dat'] += $row['sotien'];
+            }
+            if (strpos($row['hinhthaitaisan'], "Quyền") === true && $row['hinhthaitaisan'] != 'Quyền sử dụng đất') {
+                $arvhhm[$i]['banquyen'] += $row['sotien'];
+            }
+            if ($row['hinhthaitaisan'] == 'Phần mềm ứng dụng') {
+                $arvhhm[$i]['phanmem'] += $row['sotien'];
+            }
+            if ($row['hinhthaitaisan'] == 'Tài sản cố định vô hình khác') {
+                $arvhhm[$i]['khac'] += $row['sotien'];
+            }
         }
     }
 }
 
-nguyengia($arhh, $arvh, $arhhcl, $arvhcl);
-tanggiamts($arhh, $arvh, $arhhcl, $arvhcl);
-haomonts($arhhhm, $arvhhm, $arhhcl, $arvhcl);
+$_sQLdv = "Select distinct thongtindonvi.madonvi" .
+    " from tblqlts inner join thongtindonvi on tblqlts.madonvi=thongtindonvi.madonvi" .
+    " where tblqlts.madonvi Like '$mah%' and tblqlts.madonvi Like '$msdv%'";
+$_qdv = mysqli_query($con, $_sQLdv);
+$_aDV = array();
+while ($_r = mysqli_fetch_array($_qdv)) {
+    $_aDV[] = $_r[0];
+}
+nguyengia($arhh, $arvh, $arhhcl, $arvhcl, $_aDV);
+tanggiamts($arhh, $arvh, $arhhcl, $arvhcl, $_aDV);
+haomonts($arhhhm, $arvhhm, $arhhcl, $arvhcl, $_aDV);
 foreach ($arhh as $ct) {
     $i = 3;
     if ($ct['noidung'] == 'Giảm trong năm') {
