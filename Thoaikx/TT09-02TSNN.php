@@ -195,7 +195,7 @@ if(isset($_POST['create'])){
 		<td class="csA4A4F90C" style="width:57px;height:20px;line-height:15px;text-align:center;vertical-align:middle;"><nobr>17</nobr></td>
 	</tr>
 <?php
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
 //Hàm tính nguyên giá
 function tgts($mats)

@@ -170,7 +170,7 @@ while($row = mysqli_fetch_array($qrsql)) {
 	</tr>
 </table>
 <?php
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 //Tiêu đề báo cáo
 echo "<table cellpadding='0' cellspacing='0' border='0' style='border-width:0px;empty-cells:show;'>";
 echo "<tr style='vertical-align:top;'>";

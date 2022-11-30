@@ -103,7 +103,7 @@
 //làm việc với cơ sở dữ liệu
 // kết nối csdl
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	$sql = "select count(tblqlts.TTQLTS) as s,tbldanhsachqd32.bac1,Sum(tblqlts.DTKV+tblqlts.TDTSXD) as sl,Sum(tblqlts.ngansach) as ns,Sum(tblqlts.nguonkhac) as nk,Sum(tblqlts.ngansach+tblqlts.nguonkhac) as ng";
 	$sql = $sql." From tblqlts inner join tbldanhsachqd32 on tblqlts.mataisan = tbldanhsachqd32.mataisanqd32";
 	$sql = $sql." Where tblqlts.madonvi = '".$dv."' and tblqlts.ngaysudung <= '".doingay($ngbaocao)."'";

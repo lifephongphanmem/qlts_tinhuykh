@@ -22,7 +22,7 @@
 <body leftMargin=10 topMargin=10 rightMargin=10 bottomMargin=10 style="background-color:#FFFFFF">
 <?php
 require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 $tungay ="";$denngay ="";$madv ="";
 $loaihinhdv = "";
 if(isset($_POST['create'])){		

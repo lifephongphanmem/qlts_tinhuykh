@@ -71,7 +71,7 @@
 //làm việc với cơ sở dữ liệu
 // kết nối csdl
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	$sql = "select tenchitiet,mataisan,ngaysudung,noidung,DTKV,dongia,thanhtien";
 	$sql = $sql." From tblqlcc Where ngaysudung Between '".doingay($ngttu)."' and '".doingay($ngtden)."' and madonvi = '".$dv."' order by TTQLcc";	
 	$queryct = mysqli_query($con,$sql);$i=0;

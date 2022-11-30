@@ -175,7 +175,7 @@
 			} 
 		}
 
-	require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+	require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 		require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");	 
 		//Lấy danh sách đơn vị
 	$_sQLdv="Select distinct thongtindonvi.madonvi, thongtindonvi.tendv from tblxuatdung inner join thongtindonvi on tblxuatdung.madonvi=thongtindonvi.madonvi where tblxuatdung.madonvi Like '$msdv%' and ngayxuat between '" . doingay($tungay) . "' and '" . doingay($denngay) . "'";

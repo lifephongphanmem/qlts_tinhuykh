@@ -132,7 +132,7 @@ while ($row = mysqli_fetch_array($qrsql))
 		return -1;
 	}
 }
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 $sql_lh="Select distinct thongtindonvi.phanloai".
 	" from tblqlts inner join thongtindonvi on tblqlts.madonvi=thongtindonvi.madonvi".
 	" where tblqlts.madonvi Like '$mah%' and tblqlts.madonvi Like '$msdv%'";

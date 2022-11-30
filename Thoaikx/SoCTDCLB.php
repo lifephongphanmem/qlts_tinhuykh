@@ -143,7 +143,7 @@
 	<tr style="vertical-align:top;">
 		<td style="width:0px;height:22px;"></td>
 		<?php
-		require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+		require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 		require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
 		function quycach($tencc)
 		{

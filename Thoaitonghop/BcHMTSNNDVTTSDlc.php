@@ -82,7 +82,7 @@
 //làm việc với cơ sở dữ liệu
 // kết nối csdl
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	$ts =  array(array("A","B1","B2","B3","B4","B5","C",0,0));
 	$cs=0;
 	$sql = "Select TTQLTS,mataisan,tenchitiet,bac1,bac2,bac3,bac4,bac5 from tblqlts where chitiethinhthai Not Like 'Đất%' and chitiethinhthai Not like 'Quyền sử dụng đất%'";

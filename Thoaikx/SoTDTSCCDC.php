@@ -101,7 +101,7 @@ function thongtints ($mats,$dk)
 	return $kq;
 }
 require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 $ar = array(array("A","B","C","D",0,0,0,0,"E",0,0,0));
 $c=0;
 $Tsl1 = 0; $Tsl2 = 0; $Tsl3 = 0; $Tsl4 = 0;

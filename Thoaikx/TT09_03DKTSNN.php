@@ -1,4 +1,4 @@
-<?php require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php"); ?>
+<?php require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php"); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>

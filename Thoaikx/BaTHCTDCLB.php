@@ -118,7 +118,7 @@
 	</tr>
 	</table>
 	<?php
-	require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+	require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
 	function tondk($mats,$tungay)
 	{

@@ -83,7 +83,7 @@
 		<td class="cs425CAA45" colspan="2" style="width:106px;height:63px;line-height:18px;text-align:center;vertical-align:middle;"><nobr>Nguy&#234;n&nbsp;gi&#225;</nobr></td>
 	</tr>
 <?php
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 require ("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
 	$sqlts = "Select tenchitiet,Year(ngayxuat) AS YearSD, CAPH, sotien, noisudung From tblxuatdung";
 	$queryts=mysqli_query($con,$sqlts);

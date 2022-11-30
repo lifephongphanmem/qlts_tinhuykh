@@ -146,7 +146,7 @@ function loaihinhdv($ms)
 //làm việc với cơ sở dữ liệu
 // kết nối csdl
 require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 function sohmlk($idts)
 {
 	global $nambaocao;

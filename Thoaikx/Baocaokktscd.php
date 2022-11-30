@@ -143,7 +143,7 @@
 	</tr>
 	</table>
 	<?php
-	require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+	require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	function tangsl($TTQLTS)
 	{
 		global $tungay;

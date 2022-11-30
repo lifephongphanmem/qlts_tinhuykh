@@ -95,7 +95,7 @@
 //làm việc với cơ sở dữ liệu
 // kết nối csdl
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	$sql = "select tbltrangcap.tengoi,tbltrangcap.sotien,tbltrangcap.soluong,tbltrangcap.caphang,tbltrangcap.ngaythang,tbltrangcap.hinhthuc,tbldanhsachqd32.bac1 from tbltrangcap inner join tbldanhsachqd32 on tbltrangcap.mataisan = tbldanhsachqd32.mataisanqd32";	
 	$sql = $sql." Where tbltrangcap.madonvi = '".$dv."' and year(tbltrangcap.ngaythang) = ".$nambaocao;
 	$sql = $sql." order by tbldanhsachqd32.bac1";

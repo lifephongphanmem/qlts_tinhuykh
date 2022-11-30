@@ -101,7 +101,7 @@
 <?php
 // kết nối csdl
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 // làm việc với table	
 	$i = 0;
 	$sql = "Select phanloai From thongtindonvi where madonvi Like '".$msdv.".%' Group by phanloai";

@@ -138,7 +138,7 @@ if(isset($_POST['create'])){
 		<td class="cs425CAA45" colspan="2" style="width:75px;height:52px;line-height:18px;text-align:center;vertical-align:middle;"><nobr>Ghi&nbsp;ch&#250;</nobr></td>
 	</tr>
 <?php
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
 	//Lấy danh sách đơn vị
 	$_sQLdv="Select distinct thongtindonvi.madonvi, thongtindonvi.tendv from tblxuatdung inner join thongtindonvi on tblxuatdung.madonvi=thongtindonvi.madonvi where tblxuatdung.madonvi Like '$msdv%' and ngayxuat between '" . doingay($tungay) . "' and '" . doingay($denngay) . "'".($BP ==""?"":"and noisudung = '" .$BP . "'");

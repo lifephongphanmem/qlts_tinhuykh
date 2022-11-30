@@ -132,7 +132,7 @@ while ($row = mysqli_fetch_array($qrsql))
 		return -1;
 	}
 }
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 function sohaomonnam($idts,$nam)
 {
 	global $con;

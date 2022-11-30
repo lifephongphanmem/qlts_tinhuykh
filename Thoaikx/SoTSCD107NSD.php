@@ -158,7 +158,7 @@ while ($row = mysqli_fetch_array($qrsql))
 //làm việc với cơ sở dữ liệu
 // kết nối csdl
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 function sapxep($in_bike1, $in_bike2){
 	if ($in_bike1["ngaythang"] > $in_bike2["ngaythang"]){
 		return 1;

@@ -115,7 +115,7 @@
 		<td></td>
 	</tr>
 <?php
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	//Tiêu đề báo cáo
 	echo"<tr style='vertical-align:top;'>";
 		echo"<td style='width:0px;height:65px;'></td>";

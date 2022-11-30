@@ -112,7 +112,7 @@ $cc = array();
 		return -1;
 	}
 }
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 function tondk($madonvi,$tencc)
 {
 	global $tungay;

@@ -103,7 +103,7 @@
 //làm việc với cơ sở dữ liệu
 // kết nối csdl
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	$ts =  array(array("A","B","C","D","E","F","G","H","Y",0,0,0,0,0,0));
 	$cs=0;
 	$sql = "select tblqlts.TTQLTS,tbldanhsachqd32.bac1,tbldanhsachqd32.bac2,tbldanhsachqd32.bac3,tbldanhsachqd32.bac4,tbldanhsachqd32.bac5,tblqlts.DTKV+tblqlts.TDTSXD as sl,tblqlts.ngansach,tblqlts.nguonkhac,tblqlts.ngansach+tblqlts.nguonkhac as ng";

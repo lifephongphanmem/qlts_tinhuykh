@@ -139,7 +139,7 @@
 		<td colspan ='29'></td>
 	</tr>
 <?php
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	$kq = "";$dckv="";$dtkv=0;$gtskt=0;
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
 	$sqld = "Select * From tblqlts Where madonvi Like '$msdv%' and (chitiethinhthai Like 'Quyền sử dụng đất%' or chitiethinhthai Like 'Đất%') and TKVDAT = '" .$DC. "' and ngaysudung <= '".doingay($denngay)."'";

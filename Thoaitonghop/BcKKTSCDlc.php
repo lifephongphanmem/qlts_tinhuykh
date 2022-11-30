@@ -80,7 +80,7 @@
 //làm việc với cơ sở dữ liệu
 // kết nối csdl
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	$sql = "select tblkiemken.tenchitiet,tblkiemken.nhom1sllt,tblkiemken.nhom1nglt,tblkiemken.nhom1cllt,tblkiemken.nhom2sltt,tblkiemken.nhom2cltt";
 	$sql = $sql." From tblkiemken inner join tblkiemke on tblkiemken.TTkiemke = tblkiemke.TTkiemke Where tblkiemke.madonvi = '".$dv."' and year(tblkiemke.ngay1) = ".$ngbaocao;	
 	$queryct = mysqli_query($con,$sql);$i=0;

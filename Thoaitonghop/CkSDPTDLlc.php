@@ -146,7 +146,7 @@ function loaihinhdv($ms)
 //làm việc với cơ sở dữ liệu
 // kết nối csdl
 
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 $_sQLdv="Select distinct thongtindonvi.madonvi, thongtindonvi.tendv".
 	" from tblqlts inner join thongtindonvi on tblqlts.madonvi=thongtindonvi.madonvi".
 	" where tblqlts.madonvi Like '$dv%'  and year(tblqlts.ngaysudung) <= ".$nambaocao.

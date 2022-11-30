@@ -124,7 +124,7 @@ if(isset($_POST['create'])){
 		return -1;
 	}
 }
-require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 $tong =0;
 $_sQLdv="Select distinct tentaisan from tbltrangcap where madonvi Like '$msdv%'".
 		($tungay == ""?"":" and ngaythang >= '" . doingay($tungay) . "'").($denngay == ""?"":" and ngaythang <= '" . doingay($denngay) . "'");
