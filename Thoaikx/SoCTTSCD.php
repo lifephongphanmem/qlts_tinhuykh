@@ -150,7 +150,7 @@
 		<?php
 		//làm việc với cơ sở dữ liệu
 		echo 'làm việc với cơ sở dữ liệu';
-		require("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+		//require("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
 		$cc = array();
 		function sapxep($in_bike1, $in_bike2)
 		{
