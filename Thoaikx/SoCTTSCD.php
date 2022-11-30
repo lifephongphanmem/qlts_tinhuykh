@@ -300,7 +300,7 @@
 				'ten' => $_r['tendv']
 			);
 		}
-
+		echo $noidung;
 		//Duyệt từng đơn vị
 		foreach ($_aDV as $_madv) {
 			$sqlts = "Select distinct tblqlts.TTQLTS,tblqlts.tenchitiet,tblqlts.DVT,tblqlts.DTKV,tblqlts.DTXD,tblqlts.chitiethinhthai,ngansach+nguonkhac as NG,tblqlts.ngaysudung,
