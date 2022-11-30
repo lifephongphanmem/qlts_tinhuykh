@@ -151,22 +151,7 @@
 		<?php
 		//làm việc với cơ sở dữ liệu
 		//echo 'làm việc với cơ sở dữ liệu';
-		function ngaythang($ngay)
-		{
-			$kq = "";
-			if ($ngay != "")
-				$kq = substr($ngay, 8, 2) . "/" . substr($ngay, 5, 2) . "/" . substr($ngay, 0, 4);
-			return $kq;
-		}
-
-		function dinhdangso($so)
-		{
-			$kq = "";
-			if ($so != 0)
-				$kq = number_format($so, 0, ",", ".");
-			return $kq;
-		}
-
+		require ("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
 		$cc = array();
 		function sapxep($in_bike1, $in_bike2)
 		{
