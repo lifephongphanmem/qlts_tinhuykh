@@ -277,6 +277,7 @@
 		
 		$_sQLdv = "Select distinct thongtindonvi.madonvi, thongtindonvi.tendv from tblqlts inner join thongtindonvi on tblqlts.madonvi=thongtindonvi.madonvi where tblqlts.madonvi Like '$msdv%'";
 		//($nam == ""?"":" and tblqlts.ngaysudung <= '" . $nam . "'");
+		echo $_sQLdv;
 		$_qdv = mysqli_query($con, $_sQLdv);
 		$_aDV = array();
 		while ($_r = mysqli_fetch_array($_qdv)) {
