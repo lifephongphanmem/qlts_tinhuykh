@@ -275,6 +275,10 @@
 			return $kq;
 		}
 
+		function write_to_console($data)
+		{
+			echo  $data;
+		}
 		$_sQLdv = "Select distinct thongtindonvi.madonvi, thongtindonvi.tendv from tblqlts inner join thongtindonvi on tblqlts.madonvi=thongtindonvi.madonvi where tblqlts.madonvi Like '$msdv%'";
 		//($nam == ""?"":" and tblqlts.ngaysudung <= '" . $nam . "'");
 		$_qdv = mysqli_query($con, $_sQLdv);
@@ -297,11 +301,8 @@
 			);
 		}
 
-		function write_to_console($data)
-		{
-
-			echo  $data;
-		}
+		write_to_console($_sQLdv);
+		
 
 
 
@@ -355,7 +356,7 @@
 			$sl3 = 0;
 			$sl4 = 0;
 			$sl5 = 0;
-			write_to_console($sqlts);
+			
 			while ($rowts = mysqli_fetch_array($queryts)) {
 				$tg[$cs][0] = $cs + 1;
 				$tg[$cs][1] = $rowts['mataisan'];
