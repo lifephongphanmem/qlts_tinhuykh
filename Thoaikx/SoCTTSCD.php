@@ -46,7 +46,7 @@
 	$noidung = "";
 	$tgsc = "";
 	$nam = "";
-	echo $_POST['nam'] . '----' . $_POST['MADV'];
+	
 	if (isset($_POST['create'])) {
 		if ($_POST['sobg'] != "")
 			$phanloai = explode('>', $_POST['sobg']);
@@ -150,6 +150,7 @@
 		<?php
 		//làm việc với cơ sở dữ liệu
 		require("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+		echo 'làm việc với cơ sở dữ liệu';
 		$cc = array();
 		function sapxep($in_bike1, $in_bike2)
 		{
