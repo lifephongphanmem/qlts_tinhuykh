@@ -39,7 +39,7 @@
 <body>
 	<?php
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-	//require("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+	//require("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	$phanloai = "";
 	$tungay = "";
 	$denngay = "";
