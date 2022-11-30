@@ -108,7 +108,7 @@
 	</table>
 	<table cellspacing="0" cellpadding="0" border="0">
 		<tr>
-			<td style="text-align: center;font-weight: bold;">SỔ CHI TIẾT TÀI SẢN CỐ ĐỊNH 1</td>
+			<td style="text-align: center;font-weight: bold;">SỔ CHI TIẾT TÀI SẢN CỐ ĐỊNH</td>
 		</tr>
 		<tr>
 			<td style="text-align: center;font-weight: bold; font-style: italic"> <?php echo "Năm: " . $nam  ?></td>
@@ -274,11 +274,7 @@
 
 			return $kq;
 		}
-
-		function write_to_console($data)
-		{
-			echo  $data;
-		}
+		
 		$_sQLdv = "Select distinct thongtindonvi.madonvi, thongtindonvi.tendv from tblqlts inner join thongtindonvi on tblqlts.madonvi=thongtindonvi.madonvi where tblqlts.madonvi Like '$msdv%'";
 		//($nam == ""?"":" and tblqlts.ngaysudung <= '" . $nam . "'");
 		$_qdv = mysqli_query($con, $_sQLdv);
@@ -300,11 +296,6 @@
 				'ten' => $_r['tendv']
 			);
 		}
-
-		write_to_console($_sQLdv);
-		
-
-
 
 		//Duyệt từng đơn vị
 		foreach ($_aDV as $_madv) {
