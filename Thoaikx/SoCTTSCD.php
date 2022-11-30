@@ -61,7 +61,7 @@
 		else
 			$tgsc = false;
 	}
-	echo 'NỘI FUNG:  '. isset($_POST['noidung']);
+	
 	if (isset($_POST['noidung']))
 		$noidung = $_POST['noidung'];
 	$machuong = "";
@@ -152,7 +152,7 @@
 		<?php
 		//làm việc với cơ sở dữ liệu
 		//echo 'làm việc với cơ sở dữ liệu';
-		include ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
+		require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 		$cc = array();
 		function sapxep($in_bike1, $in_bike2)
 		{
@@ -301,7 +301,7 @@
 				'ten' => $_r['tendv']
 			);
 		}
-		echo $noidung;
+		
 		//Duyệt từng đơn vị
 		foreach ($_aDV as $_madv) {
 			$sqlts = "Select distinct tblqlts.TTQLTS,tblqlts.tenchitiet,tblqlts.DVT,tblqlts.DTKV,tblqlts.DTXD,tblqlts.chitiethinhthai,ngansach+nguonkhac as NG,tblqlts.ngaysudung,
