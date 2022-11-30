@@ -332,7 +332,7 @@
 			}
 
 			$sqlts = $sqlts . " order by tbldanhsachqd32.ttsx,tbldanhsachqd32.mataisanqd32,tblqlts.TTQLTS";
-			echo $sqlts;
+			//echo $sqlts;
 			$queryts = mysqli_query($con, $sqlts);
 			$tg = array(array(0, "A", "B", "C", "D", 0, 0, 0, 0, 0, 0, 0, 0));
 			//$tg = array();
