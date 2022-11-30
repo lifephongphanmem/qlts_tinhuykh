@@ -108,7 +108,7 @@
 	</table>
 	<table cellspacing="0" cellpadding="0" border="0">
 		<tr>
-			<td style="text-align: center;font-weight: bold;">SỔ CHI TIẾT TÀI SẢN CỐ ĐỊNH</td>
+			<td style="text-align: center;font-weight: bold;">SỔ CHI TIẾT TÀI SẢN CỐ ĐỊNH 123</td>
 		</tr>
 		<tr>
 			<td style="text-align: center;font-weight: bold; font-style: italic"> <?php echo "Năm: " . $nam  ?></td>
