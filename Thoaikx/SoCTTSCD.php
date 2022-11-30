@@ -46,7 +46,7 @@
 	$noidung = "";
 	$tgsc = "";
 	$nam = "";
-	echo isset($_POST['create']);
+	echo $_POST['nam'] . '----' . $_POST['MADV'];
 	if (isset($_POST['create'])) {
 		if ($_POST['sobg'] != "")
 			$phanloai = explode('>', $_POST['sobg']);
@@ -275,7 +275,7 @@
 
 			return $kq;
 		}
-		
+
 		$_sQLdv = "Select distinct thongtindonvi.madonvi, thongtindonvi.tendv from tblqlts inner join thongtindonvi on tblqlts.madonvi=thongtindonvi.madonvi where tblqlts.madonvi Like '$msdv%'";
 		//($nam == ""?"":" and tblqlts.ngaysudung <= '" . $nam . "'");
 		echo $_sQLdv;
@@ -349,7 +349,7 @@
 			$sl3 = 0;
 			$sl4 = 0;
 			$sl5 = 0;
-			
+
 			while ($rowts = mysqli_fetch_array($queryts)) {
 				$tg[$cs][0] = $cs + 1;
 				$tg[$cs][1] = $rowts['mataisan'];
