@@ -51,11 +51,11 @@
 		}
 		
 		// Đọc số tiền		
-		$mangso = array('không','một','hai','ba','bốn','năm','sáu','bảy','tám','chín'); 
-		$donvi=" đồng chẵn./. ";
+		//$mangso = array('không','một','hai','ba','bốn','năm','sáu','bảy','tám','chín'); 
+		//$donvi=" đồng chẵn./. ";
 		function dochangchuc($so,$daydu) 
 		{ 
-			global $mangso; 
+			$mangso = array('không','một','hai','ba','bốn','năm','sáu','bảy','tám','chín'); 
 			$chuoi = ""; 
 			$chuc = floor($so/10); 
 			$donvi = $so%10; 
@@ -81,7 +81,7 @@
 		} 
 		function docblock($so,$daydu) 
 		{ 
-			global $mangso; 
+			$mangso = array('không','một','hai','ba','bốn','năm','sáu','bảy','tám','chín'); 
 			$chuoi = ""; 
 			$tram = floor($so/100); 
 			$so = $so%100; 
@@ -115,10 +115,11 @@
 				$chuoi .= docblock($so,$daydu);  
 			return $chuoi; 
 		} 
+		
 		function docso($so) 
 		{ 
-			global $mangso; 
-			global $donvi;
+			$mangso = array('không','một','hai','ba','bốn','năm','sáu','bảy','tám','chín'); 
+			$donvi=" đồng chẵn./. ";
 			if ($so==0) return $mangso[0]; 
 			$chuoi = ""; 
 			$hauto = ""; 
@@ -135,6 +136,7 @@
 			while ($so>0); 
 			return ucfirst(trim($chuoi)); 
 		}
+
 function convert2Roman($num){
 	$n = intval($num);
 	$res = '';
@@ -169,5 +171,3 @@ function convert2Roman($num){
 	// return the result
 	return $res;
 }
-?>
-

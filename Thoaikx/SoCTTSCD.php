@@ -39,7 +39,7 @@
 <body>
 	<?php
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
-	require("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+	//require("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
 	$phanloai = "";
 	$tungay = "";
 	$denngay = "";
@@ -47,7 +47,7 @@
 	$noidung = "";
 	$tgsc = "";
 	$nam = "";
-	
+
 	if (isset($_POST['create'])) {
 		if ($_POST['sobg'] != "")
 			$phanloai = explode('>', $_POST['sobg']);
@@ -151,7 +151,22 @@
 		<?php
 		//làm việc với cơ sở dữ liệu
 		//echo 'làm việc với cơ sở dữ liệu';
-		
+		function ngaythang($ngay)
+		{
+			$kq = "";
+			if ($ngay != "")
+				$kq = substr($ngay, 8, 2) . "/" . substr($ngay, 5, 2) . "/" . substr($ngay, 0, 4);
+			return $kq;
+		}
+
+		function dinhdangso($so)
+		{
+			$kq = "";
+			if ($so != 0)
+				$kq = number_format($so, 0, ",", ".");
+			return $kq;
+		}
+
 		$cc = array();
 		function sapxep($in_bike1, $in_bike2)
 		{
