@@ -567,7 +567,7 @@
 			<h4 class="modal-title" style="text-align:center;"><strong>Sổ chi tiết tài sản cố định</strong></h4>
 		</div>
 		<div class="modal-body">
-			<form name="thoai" role="form" method="Post" class="form-horizontal" onsubmit="return kt()" action="SoCTTSCD.php">
+			<form name="thoai" role="form" method="Post" class="form-horizontal" onsubmit="return kt()">
 				<div class="form-group" <?php if (strlen($ma[0]) >= 16) {
 											echo "style='display:none';";
 										} ?>>

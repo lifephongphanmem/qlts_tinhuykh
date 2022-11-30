@@ -46,6 +46,7 @@
 	$noidung = "";
 	$tgsc = "";
 	$nam = "";
+	echo isset($_POST['create']);
 	if (isset($_POST['create'])) {
 		if ($_POST['sobg'] != "")
 			$phanloai = explode('>', $_POST['sobg']);
