@@ -39,6 +39,7 @@
 <body>
 	<?php
 	require("$_SERVER[DOCUMENT_ROOT]/Main/connect.php");
+	require("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
 	$phanloai = "";
 	$tungay = "";
 	$denngay = "";
@@ -149,8 +150,8 @@
 		</tr>
 		<?php
 		//làm việc với cơ sở dữ liệu
-		echo 'làm việc với cơ sở dữ liệu';
-		//require("$_SERVER[DOCUMENT_ROOT]/thoaikx/general.php");
+		//echo 'làm việc với cơ sở dữ liệu';
+		
 		$cc = array();
 		function sapxep($in_bike1, $in_bike2)
 		{
@@ -279,7 +280,7 @@
 
 		$_sQLdv = "Select distinct thongtindonvi.madonvi, thongtindonvi.tendv from tblqlts inner join thongtindonvi on tblqlts.madonvi=thongtindonvi.madonvi where tblqlts.madonvi Like '$msdv%'";
 		//($nam == ""?"":" and tblqlts.ngaysudung <= '" . $nam . "'");
-		echo $_sQLdv;
+		//echo $_sQLdv;
 		$_qdv = mysqli_query($con, $_sQLdv);
 		$_aDV = array();
 		while ($_r = mysqli_fetch_array($_qdv)) {
