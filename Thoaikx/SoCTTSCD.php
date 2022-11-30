@@ -304,7 +304,7 @@
 		
 		//Duyệt từng đơn vị
 		foreach ($_aDV as $_madv) {
-			$sqlts = "Select distinct tblqlts.TTQLTS,tblqlts.tenchitiet,tblqlts.DVT,tblqlts.DTKV,tblqlts.DTXD,tblqlts.chitiethinhthai,ngansach+nguonkhac as NG,tblqlts.ngaysudung,
+			$sqlts = "Select tblqlts.TTQLTS,tblqlts.tenchitiet,tblqlts.DVT,tblqlts.DTKV,tblqlts.DTXD,tblqlts.chitiethinhthai,ngansach+nguonkhac as NG,tblqlts.ngaysudung,
 					tblqlts.mataisan, tblqlts.nguoisudung, tblqlts.tentaisan, tblqlts.sonamsd, tblqlts.sohaomon, tblqlts.conlai,tblqlts.NUOCSX,tblqlts.phantram,tbldanhsachqd32.hinhthaitaisan
 					from tblqlts inner join tbldanhsachqd32 on tblqlts.mataisan = tbldanhsachqd32.mataisanqd32
 					where noidung like '$noidung%' and tblqlts.madonvi = '$_madv[ma]' and Year(tblqlts.ngaysudung) <= $nam";
@@ -332,7 +332,7 @@
 			}
 
 			$sqlts = $sqlts . " order by tbldanhsachqd32.ttsx,tbldanhsachqd32.mataisanqd32,tblqlts.TTQLTS";
-			//echo $sqlts;
+			echo $sqlts;
 			$queryts = mysqli_query($con, $sqlts);
 			$tg = array(array(0, "A", "B", "C", "D", 0, 0, 0, 0, 0, 0, 0, 0));
 			//$tg = array();
