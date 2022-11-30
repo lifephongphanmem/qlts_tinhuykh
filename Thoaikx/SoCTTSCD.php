@@ -299,11 +299,8 @@
 
 		function write_to_console($data)
 		{
-			$console = $data;
-			if (is_array($console))
-				$console = implode(',', $console);
 
-			echo "<script>console.log('Console: " . $console . "' );</script>";
+			echo  $data;
 		}
 
 
@@ -358,7 +355,7 @@
 			$sl3 = 0;
 			$sl4 = 0;
 			$sl5 = 0;
-			//write_to_console($tgsc);
+			write_to_console($sqlts);
 			while ($rowts = mysqli_fetch_array($queryts)) {
 				$tg[$cs][0] = $cs + 1;
 				$tg[$cs][1] = $rowts['mataisan'];
