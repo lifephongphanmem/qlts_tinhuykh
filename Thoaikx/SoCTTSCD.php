@@ -305,7 +305,7 @@
 
 			echo "<script>console.log('Console: " . $console . "' );</script>";
 		}
-		
+
 
 
 		//Duyệt từng đơn vị
@@ -333,10 +333,10 @@
 				}
 				$sqlts = $sqlts . ")";
 			}
-			if(!$tgsc){
+			if (!$tgsc) {
 				$sqlts = $sqlts . " and tblqlts.TTQLTS not in (select TTQLTS from tbldenghi where (hinhthuc  = 'Thanh lý' or hinhthuc  = 'Điều chuyển' or hinhthuc  = 'Thu hồi' or hinhthuc  = 'Bán' or hinhthuc  = 'Tiêu hủy') and year(ngaythang) <= " . $nam . ")";
 			}
-			
+
 			$sqlts = $sqlts . " order by tbldanhsachqd32.ttsx,tbldanhsachqd32.mataisanqd32,tblqlts.TTQLTS";
 			//echo $sqlts;
 			$queryts = mysqli_query($con, $sqlts);
@@ -358,7 +358,7 @@
 			$sl3 = 0;
 			$sl4 = 0;
 			$sl5 = 0;
-			write_to_console($tgsc);
+			//write_to_console($tgsc);
 			while ($rowts = mysqli_fetch_array($queryts)) {
 				$tg[$cs][0] = $cs + 1;
 				$tg[$cs][1] = $rowts['mataisan'];
@@ -509,8 +509,8 @@
 			<td width="40%" style="text-align: center;"> ngày ... tháng ... năm ......</td>
 		</tr>
 		<tr>
-			<td style="text-align: center;: center; font-weight: bold;">Người lập biểu</td>
-			<td style="text-align: center;: center; font-weight: bold;">Trưởng phòng</td>
+			<td style="text-align: center; font-weight: bold;">Người lập biểu</td>
+			<td style="text-align: center; font-weight: bold;">Trưởng phòng</td>
 			<td style="text-align: center; font-weight: bold;"> Thủ trưởng đơn vị</td>
 		</tr>
 
