@@ -696,7 +696,7 @@
 		if ($("input[name='ccdc']:checked").length == 1)
 			return "/Tienich/SoCTTSCD.php";
 		else
-			return "/Thoaikx/SoCTTSCD.php";
+			return "SoCTTSCD.php";
 	}
 </script>
 <!----------- Footer ------------->
