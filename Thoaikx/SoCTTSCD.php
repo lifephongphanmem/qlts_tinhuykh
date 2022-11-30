@@ -61,6 +61,7 @@
 		else
 			$tgsc = false;
 	}
+	echo isset($_POST['noidung']);
 	if (isset($_POST['noidung']))
 		$noidung = $_POST['noidung'];
 	$machuong = "";
