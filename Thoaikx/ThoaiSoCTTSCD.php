@@ -667,7 +667,7 @@
 	</div>
 </div>
 <script language="javascript" type="text/javascript">
-	document.forms['thoai'].name.focus();
+	//document.forms['thoai'].name.focus();
 
 	function set_focus() {
 		document.forms['thoai'].name.focus();
