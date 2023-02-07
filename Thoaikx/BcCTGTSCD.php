@@ -381,6 +381,7 @@ foreach($_aDV as $_madv) {
 				$nhoms9 = 0;
 				$nhoms10 = 0;
 				$j = 0;
+				echo "$tg[$j][11]";
 				for ($j = 0; $j < $cs; $j++) {
 					if ($tg[$j][4] == $tennhom) {
 						$nhoms8 += $tg[$j][8];
