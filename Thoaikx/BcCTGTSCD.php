@@ -92,7 +92,7 @@ while($row = mysqli_fetch_array($qrsql)) {
 		</table>
 		<table cellspacing="0" cellpadding="0" border="0">
 		<tr>
-            <td  style="text-align: center;font-weight: bold;">BÁO CÁO CHI TIẾT GIẢM TÀI SẢN CỐ ĐỊNH</td>
+            <td  style="text-align: center;font-weight: bold;">BÁO CÁO CHI TIẾT GIẢM TÀI SẢN CỐ ĐỊNH 123</td>
 		</tr>
 		<tr>
 			<td  style="text-align: center;font-weight: bold; font-style: italic">  <?php echo "Năm: ".$nam  ?></td>
@@ -386,8 +386,8 @@ foreach($_aDV as $_madv) {
 						$nhoms8 += $tg[$j][8];
 						$nhoms9 += $tg[$j][9];
 						$nhoms10 += $tg[$j][10];
-						$nhoms11 += 0;
-						// $nhoms11 += is_numeric($tg[$j][11]) ? $tg[$j][11] : 0;
+						// $nhoms11 += 0;
+						$nhoms11 += is_numeric($tg[$j][11]) ? $tg[$j][11] : 0;
 					}
 				}
 			$nhoms8 = dinhdangso($nhoms8);
