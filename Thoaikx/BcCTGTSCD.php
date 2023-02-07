@@ -409,6 +409,7 @@
 					$nhoms8 = 0;
 					$nhoms9 = 0;
 					$nhoms10 = 0;
+					$nhoms11 = 0;
 					$j = 0;
 
 					for ($j = 0; $j < $cs; $j++) {
