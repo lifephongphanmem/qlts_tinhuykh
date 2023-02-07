@@ -386,7 +386,8 @@ foreach($_aDV as $_madv) {
 						$nhoms8 += $tg[$j][8];
 						$nhoms9 += $tg[$j][9];
 						$nhoms10 += $tg[$j][10];
-						$nhoms11 += is_numeric($tg[$j][11]) ? $tg[$j][11] : 0;
+						$nhoms11 += 0;
+						// $nhoms11 += is_numeric($tg[$j][11]) ? $tg[$j][11] : 0;
 					}
 				}
 			$nhoms8 = dinhdangso($nhoms8);
