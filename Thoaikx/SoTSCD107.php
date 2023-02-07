@@ -664,7 +664,7 @@
 			<td width="33%" style="text-align: center;font-style: italic">Ngày ... tháng ... năm ......</td>
 		</tr>
 		<tr>
-			<td style="text-align: center;: center; font-weight: bold;">NGƯỜI LẬP SỔ</td>
+			<td style="text-align: center; font-weight: bold;">NGƯỜI LẬP SỔ</td>
 			<td style="text-align: center; font-weight: bold;"> KẾ TOÁN TRƯỞNG</td>
 			<td style="text-align: center; font-weight: bold;"> THỦ TRƯỞNG ĐƠN VỊ</td>
 		</tr>
