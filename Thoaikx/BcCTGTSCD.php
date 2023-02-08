@@ -121,7 +121,7 @@
 	</table>
 	<table cellspacing="0" cellpadding="0" border="0">
 		<tr>
-			<td style="text-align: center;font-weight: bold;">BÁO CÁO CHI TIẾT GIẢM TÀI SẢN CỐ ĐỊNH 123</td>
+			<td style="text-align: center;font-weight: bold;">BÁO CÁO CHI TIẾT GIẢM TÀI SẢN CỐ ĐỊNH</td>
 		</tr>
 		<tr>
 			<td style="text-align: center;font-weight: bold; font-style: italic"> <?php echo "Năm: " . $nam  ?></td>
@@ -418,7 +418,7 @@
 							$nhoms9 += $tg[$j][9];
 							$nhoms10 += $tg[$j][10];
 							// $nhoms11 += 0;
-							$nhoms11 += chkDbl($tg[$j][11]);
+							$nhoms11 += $tg[$j][11];
 						}
 					}
 					$nhoms8 = dinhdangso($nhoms8);
