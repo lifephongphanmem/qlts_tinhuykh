@@ -356,7 +356,11 @@
 			$sl7 = 0;
 			$sl8 = 0;
 			while ($rowts = mysqli_fetch_array($queryts)) {
-				$sqlhm = "Select sodu,sotien, max(namhaomon) as namhm from tblhaomon where TTQLTS =" . $rowts['TTQLTS'] . " and namhaomon <= $nam";
+				$sqlhm = "Select sodu,sotien, max(namhaomon) as namhm from tblhaomon where TTQLTS =" . $rowts['TTQLTS'] . " and namhaomon =" .
+					"(select max(namhaomon) as nam from tblhaomon where TTQLTS =" . $rowts['TTQLTS'] . " and namhaomon  <= $nam)";
+
+					// echo $sqlhm;
+
 				$qrsqlhm = mysqli_query($con, $sqlhm);
 				while ($rowhm = mysqli_fetch_array($qrsqlhm)) {
 					$tg[$cs][0] = $cs + 1;
@@ -407,9 +411,9 @@
 				$sl4 = dinhdangso($tg[$i][11]);
 				//$tenhienthi = $tennhom == 'Quyền sử dụng đất' ? 'Đất khuân viên' : ($tennhom == 'Nhà' ? 'Nhà' : ($tennhom == 'Phương tiện vận tải đường bộ' ? 'Xe ô tô' : 'Tài sản cố định khác'));
 				$tengroup = $tennhom;
-				
-				if ($tennhom != $tennhomsau && $thoidiem_sau != $thoidiem ) {
-					
+
+				if ($tennhom != $tennhomsau && $thoidiem_sau != $thoidiem) {
+
 					//if ($tennhom == 'Quyền sử dụng đất' || $tennhom == 'Nhà' || $tennhom == 'Phương tiện vận tải đường bộ') {
 					// Nhom tai san
 					$nhoms8 = 0;
@@ -417,8 +421,8 @@
 					$nhoms10 = 0;
 					$nhoms11 = 0;
 					$j = 0;
-					
-					for ($j = 0; $j < $cs; $j++) {						
+
+					for ($j = 0; $j < $cs; $j++) {
 						if ($tg[$j][4] == $tennhom) {
 							// if ($tg[$j][4] == $tennhom  && $tg[$j][6] == $thoidiem) {
 							$nhoms8 += $tg[$j][8];
@@ -441,7 +445,8 @@
 					echo "<td style='text-align: left;'></td>";
 					echo "<td style='text-align: left;'></td>";
 					echo "<td style='text-align: right;'><nobr>" . $nhoms8 . "</nobr></td>";
-					echo "<td style='text-align: right;'><nobr>" . $nhoms9 . "</nobr></td>";
+					echo "<td style='text-align: right;'><nobr></nobr></td>";
+					// echo "<td style='text-align: right;'><nobr>" . $nhoms9 . "</nobr></td>";
 					echo "<td style='text-align: right;'><nobr>" . $nhoms10 . "</nobr></td>";
 					echo "<td style='text-align: right;'><nobr>" . $nhoms11 . "</nobr></td>";
 					echo "<td style='text-align: left;'></td>";
@@ -457,7 +462,8 @@
 				echo "<td style='text-align: right;'>" . $tg[$i][6]  . "</td>";
 				echo "<td style='text-align: right;'>" . $tg[$i][7]  . "</td>";
 				echo "<td style='text-align: right;'><nobr>" . $sl1 . "</nobr></td>";
-				echo "<td style='text-align: right;'><nobr>" . $sl2 . "</nobr></td>";
+				echo "<td style='text-align: right;'><nobr></nobr></td>";
+				// echo "<td style='text-align: right;'><nobr>" . $sl2 . "</nobr></td>";
 				echo "<td style='text-align: right;'><nobr>" . $sl3 . "</nobr></td>";
 				echo "<td style='text-align: right;'><nobr>" . $sl4 . "</nobr></td>";
 				echo "<td style='text-align: right;'><nobr>" . $tg[$i][12] . "</nobr></td>";
@@ -475,7 +481,8 @@
 			echo "<td style='text-align: left;'></td>";
 			echo "<td style='text-align: left;'></td>";
 			echo "<td style='text-align: right;'><nobr>" . dinhdangso($tongNG) . "</nobr></td>";
-			echo "<td style='text-align: right;'><nobr>" . dinhdangso($tongHM) . "</nobr></td>";
+			echo "<td style='text-align: right;'><nobr></nobr></td>";
+			// echo "<td style='text-align: right;'><nobr>" . dinhdangso($tongHM) . "</nobr></td>";
 			echo "<td style='text-align: right;'><nobr>" . dinhdangso($tongLK) . "</nobr></td>";
 			echo "<td style='text-align: right;'><nobr>" . dinhdangso($tongCL) . "</nobr></td>";
 			echo "<td style='text-align: right;'></td>";
