@@ -332,6 +332,9 @@
 				}
 				$sqlts = $sqlts . ")";
 			}
+
+			$sqlts = $sqlts . " order by tblqlts.mataisan, tbldenghi.ngaythang";
+
 			$queryts = mysqli_query($con, $sqlts);
 			$tg = array(array(0, "A", "B", "C", "D", "E", 0, 0, 0, 0, 0, 0, 0));
 			$cs = 0;
@@ -387,6 +390,8 @@
 			echo "<td colspan='14' style='vertical-align:middle;font-weight: bold;text-align: left'>$_madv[ten]</td>";
 			echo "</tr>";
 			//
+			$tennhomsau = '';
+			$thoidiem_sau = '';
 			for ($i = 0; $i < $cs; $i++) {
 				$tongNG += $tg[$i][8];
 				$tongHM += $tg[$i][9];
@@ -403,7 +408,8 @@
 				//$tenhienthi = $tennhom == 'Quyền sử dụng đất' ? 'Đất khuân viên' : ($tennhom == 'Nhà' ? 'Nhà' : ($tennhom == 'Phương tiện vận tải đường bộ' ? 'Xe ô tô' : 'Tài sản cố định khác'));
 				$tengroup = $tennhom;
 				
-				if ($tennhom != $tennhomsau) {
+				if ($tennhom != $tennhomsau && $thoidiem_sau != $thoidiem ) {
+					
 					//if ($tennhom == 'Quyền sử dụng đất' || $tennhom == 'Nhà' || $tennhom == 'Phương tiện vận tải đường bộ') {
 					// Nhom tai san
 					$nhoms8 = 0;
@@ -413,7 +419,8 @@
 					$j = 0;
 					
 					for ($j = 0; $j < $cs; $j++) {						
-						if ($tg[$j][4] == $tennhom  && $tg[$j][6] == $thoidiem) {
+						if ($tg[$j][4] == $tennhom) {
+							// if ($tg[$j][4] == $tennhom  && $tg[$j][6] == $thoidiem) {
 							$nhoms8 += $tg[$j][8];
 							$nhoms9 += $tg[$j][9];
 							$nhoms10 += $tg[$j][10];
@@ -456,6 +463,7 @@
 				echo "<td style='text-align: right;'><nobr>" . $tg[$i][12] . "</nobr></td>";
 				echo "</tr>";
 				$tennhomsau = $tennhom;
+				$thoidiem_sau = $thoidiem;
 			}
 			//Cổng tổng
 			echo "<tr style='font-weight: bold'>";
