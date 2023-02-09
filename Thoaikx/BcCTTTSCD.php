@@ -305,6 +305,12 @@
 				}
 				$sqlts = $sqlts . ")";
 			}
+			//thêm tài sản tăng giảm trong năm 09/02/2023
+			if($tgsc){				
+				$sqlts = $sqlts . " or tblqlts.TTQLTS in (select TTQLTS from tbltanggiam where madonvi ='$_madv[ma]' and Year(ngaytanggiam) = $nam)";
+			}
+
+			//hết thêm ts
 			$sqlts = $sqlts . " order by tbldanhsachqd32.mataisanqd32";
 			//echo $sqlts;
 			$queryts = mysqli_query($con, $sqlts);
