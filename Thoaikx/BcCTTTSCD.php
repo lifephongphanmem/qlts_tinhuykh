@@ -283,7 +283,7 @@
 		//Duyệt từng đơn vị
 		foreach ($_aDV as $_madv) {
 			$sqlts = "Select distinct tblqlts.TTQLTS,tblqlts.tenchitiet,tblqlts.DVT,tblqlts.DTKV,tblqlts.DTXD,tblqlts.chitiethinhthai,ngansach+nguonkhac as NG,tblqlts.ngaysudung,
-					tblqlts.mataisan, tblqlts.nguoisudung, tblqlts.tentaisan, tblqlts.sonamsd, tblqlts.sohaomon, tblqlts.conlai,tblqlts.lydotang,tbldanhsachqd32.hinhthaitaisan
+					tblqlts.mataisan, tblqlts.nguoisudung, tblqlts.tentaisan, tblqlts.sonamsd, tblqlts.sohaomon, tblqlts.conlai,tblqlts.lydotang,tbldanhsachqd32.hinhthaitaisan, tblqlts.phantram
 					from tblqlts inner join tbldanhsachqd32 on tblqlts.mataisan = tbldanhsachqd32.mataisanqd32
 					where noidung like '$noidung%' and tblqlts.madonvi = '$_madv[ma]' and Year(tblqlts.ngaysudung) = $nam";
 			if ($phanloai == "") {
@@ -305,10 +305,25 @@
 				}
 				$sqlts = $sqlts . ")";
 			}
+			$a_tanggiam = [];
 			//thêm tài sản tăng giảm trong năm 09/02/2023
-			if($tgsc){				
-				$sqlts = $sqlts . " or tblqlts.TTQLTS in (select TTQLTS from tbltanggiam where madonvi ='$_madv[ma]' and Year(ngaytanggiam) = $nam)";
+			if ($tgsc) {
+				$sqlts = $sqlts . " or tblqlts.TTQLTS in (select TTQLTS from tbltanggiam where tanggiam = 'Tăng' and madonvi ='$_madv[ma]' and Year(ngaytanggiam) = $nam)";
+				//lấy danh sách tài sản tăng nguyên giá trong năm => đưa thông tin tăng NG thay thông tin tài sản
+				$sqltg = "select TTQLTS, ngaytanggiam, soluong, sotien from tbltanggiam where tanggiam = 'Tăng' and madonvi ='$_madv[ma]' and Year(ngaytanggiam) = $nam";
+				$qrtg = mysqli_query($con, $sqltg);
+				//echo $sqltg;
+				while ($row_tg = mysqli_fetch_array($qrtg)) {
+					echo $row_tg['TTQLTS'];
+					$a_tanggiam[$row_tg['TTQLTS']] = [
+						'TTQLTS' => $row_tg['TTQLTS'],
+						'ngaytanggiam' => $row_tg['ngaytanggiam'],
+						'soluong' => $row_tg['soluong'],
+						'sotien' => $row_tg['sotien']
+					];
+				}
 			}
+
 
 			//hết thêm ts
 			$sqlts = $sqlts . " order by tbldanhsachqd32.mataisanqd32";
@@ -333,14 +348,14 @@
 			$sl6 = 0;
 			$sl7 = 0;
 			$sl8 = 0;
-			while ($rowts = mysqli_fetch_array($queryts)) {				
+			while ($rowts = mysqli_fetch_array($queryts)) {
 				//lấy hao mòn 08/02/2023
 				$sqlhm = "Select sodu,sotien from tblhaomon where TTQLTS =" . $rowts['TTQLTS'] . " and namhaomon =" . $nam;
 				// echo $sqlhm;
 
 				$qrsqlhm = mysqli_query($con, $sqlhm);
-				while ($rowhm = mysqli_fetch_array($qrsqlhm)) {					
-					$tg[$cs][9] = $rowhm['sotien'];					
+				while ($rowhm = mysqli_fetch_array($qrsqlhm)) {
+					$tg[$cs][9] = $rowhm['sotien'];
 				}
 
 				//kết thúc -- lấy hao mòn 
@@ -364,18 +379,36 @@
 				$sttangtk = 0;
 				$stgiamtk = 0;
 				//if ($rowts['DTKV'] + $rowts['DTXD'] + $tang > $kq) {
-				$tg[$cs][0] = $cs + 1;
-				$tg[$cs][1] = $rowts['mataisan'];
-				$tg[$cs][2] = $rowts['mataisan'] . "." . $rowts['TTQLTS'];
-				$tg[$cs][3] = $rowts['tenchitiet'];
-				$tg[$cs][4] = $rowts['tentaisan'];
-				$tg[$cs][5] = $rowts['nguoisudung'];
-				$tg[$cs][6] = ngaythang($rowts['ngaysudung']);
-				$tg[$cs][7] = $rowts['sonamsd'];
-				$tg[$cs][8] = $rowts['NG'];
-				//$tg[$cs][9] = $rowts['sohaomon'];
-				$tg[$cs][10] = $rowts['conlai'] - $tg[$cs][9];
-				$tg[$cs][11] = $rowts['lydotang'];
+					//nếu tài sản tăng nguyên giá thì lấy thông tin tăng
+				if (isset($a_tanggiam[$rowts['TTQLTS']])) {
+					$a_tg = $a_tanggiam[$rowts['TTQLTS']];
+					$tg[$cs][0] = $cs + 1;
+					$tg[$cs][1] = $rowts['mataisan'];
+					$tg[$cs][2] = $rowts['mataisan'] . "." . $rowts['TTQLTS'];
+					$tg[$cs][3] = $rowts['tenchitiet'];
+					$tg[$cs][4] = $rowts['tentaisan'];
+					$tg[$cs][5] = $rowts['nguoisudung'];
+					$tg[$cs][6] = ngaythang($a_tg['ngaytanggiam']);
+					$tg[$cs][7] = $rowts['sonamsd'];
+					$tg[$cs][8] = $a_tg['sotien'];
+					$tg[$cs][9] = round($a_tg['sotien'] *  $rowts['phantram'] / 100, 0);
+					$tg[$cs][10] = $tg[$cs][8] - $tg[$cs][9];
+					$tg[$cs][11] = $rowts['lydotang'];
+				} else {
+					$tg[$cs][0] = $cs + 1;
+					$tg[$cs][1] = $rowts['mataisan'];
+					$tg[$cs][2] = $rowts['mataisan'] . "." . $rowts['TTQLTS'];
+					$tg[$cs][3] = $rowts['tenchitiet'];
+					$tg[$cs][4] = $rowts['tentaisan'];
+					$tg[$cs][5] = $rowts['nguoisudung'];
+					$tg[$cs][6] = ngaythang($rowts['ngaysudung']);
+					$tg[$cs][7] = $rowts['sonamsd'];
+					$tg[$cs][8] = $rowts['NG']; //chưa cộng tăng giá trị trong kỳ
+					//$tg[$cs][9] = $rowts['sohaomon'];
+					$tg[$cs][10] = $rowts['conlai'] - $tg[$cs][9];
+					$tg[$cs][11] = $rowts['lydotang'];
+				}
+
 
 				$cs = $cs + 1;
 				//$stdk=$stdk + kieudouble($rowts['NG']) + $sttang - $stgiam;$sttkt=$sttkt+$sttangtk;$sttkg=$sttkg+$stgiamtk;$stck=$stck+kieudouble($rowts['NG']) + $sttang - $stgiam + $sttangtk - $stgiamtk;
