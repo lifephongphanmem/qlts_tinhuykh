@@ -276,7 +276,7 @@ require ("$_SERVER[DOCUMENT_ROOT]/Thoaikx/general.php");
 	<tr style="vertical-align:top;">
 		<td style="width:0px;height:20px;"></td>
 		<td class="cs62AA4CC9" colspan="4" style="width:360px;height:20px;"></td>
-		<td class="cs62AA4CC9" colspan="5" style="width:360px;height:20px;text-align:center;vertical-align:middle;font-style:italic;"><?php echo $madv[7].", ngày ... tháng ... năm ......"; ?></td>
+		<td class="cs62AA4CC9" colspan="5" style="width:360px;height:20px;text-align:center;vertical-align:middle;font-style:italic;"><?php echo "Ngày ... tháng ... năm ......"; ?></td>
 	</tr>
 	<tr style="vertical-align:top;">
 		<td style="width:0px;height:20px;"></td>
