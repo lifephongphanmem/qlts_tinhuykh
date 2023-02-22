@@ -124,8 +124,8 @@
 			<th width="5%">Số thẻ</th>
 			<th width="20%">Tên tài sản</th>
 			<th>Người sử dụng</th>
-			<th>Ngày tăng</th>
-			<th>Số năm sử dụng</th>
+			<th width="8%">Ngày tăng</th>
+			<th width="5%">Số năm sử dụng</th>
 			<th>Nguyên giá</th>
 			<th>Giá trị hao mòn trong kỳ</th>
 			<th>Giá trị còn lại</th>
@@ -158,6 +158,7 @@
 				return -1;
 			}
 		}
+
 		function giamtk($msts, $condition)
 		{
 			global $nam;
@@ -179,6 +180,7 @@
 				$kq = $sotien;
 			return $kq;
 		}
+
 		//tính số lượng
 		function tinhtoan($msts, $condition, $condition1, $tanggiam)
 		{
@@ -405,7 +407,8 @@
 					$tg[$cs][7] = $rowts['sonamsd'];
 					$tg[$cs][8] = $rowts['NG']; //chưa cộng tăng giá trị trong kỳ
 					//$tg[$cs][9] = $rowts['sohaomon'];
-					$tg[$cs][10] = $rowts['conlai'] - $tg[$cs][9];
+					//$tg[$cs][10] = $rowts['conlai'] - $tg[$cs][9]; 22.02.2023 sửa lại do nếu kết xuất năm trc (hiên tại 2023 nếu kết xuất bc năm 2021 thì "conlai" đã trừ hao mòn 2022 => sai)
+					$tg[$cs][10] = $rowts['NG'] - $tg[$cs][9];
 					$tg[$cs][11] = $rowts['lydotang'];
 				}
 
@@ -548,8 +551,8 @@
 			<td width="40%" style="text-align: center;"> ngày ... tháng ... năm ......</td>
 		</tr>
 		<tr>
-			<td style="text-align: center;: center; font-weight: bold;">Người lập biểu</td>
-			<td style="text-align: center;: center; font-weight: bold;">Kế toán trưởng</td>
+			<td style="text-align: center; font-weight: bold;">Người lập biểu</td>
+			<td style="text-align: center; font-weight: bold;">Kế toán trưởng</td>
 			<td style="text-align: center; font-weight: bold;"> Thủ trưởng đơn vị</td>
 		</tr>
 
