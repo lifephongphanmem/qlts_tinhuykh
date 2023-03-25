@@ -111,7 +111,7 @@
 	</table>
 	<table cellspacing="0" cellpadding="0" border="0">
 		<tr>
-			<td style="text-align: center;font-weight: bold;">SỔ CHI TIẾT TÀI SẢN CỐ ĐỊNH 123</td>
+			<td style="text-align: center;font-weight: bold;">SỔ CHI TIẾT TÀI SẢN CỐ ĐỊNH</td>
 		</tr>
 		<tr>
 			<td style="text-align: center;font-weight: bold; font-style: italic"> <?php echo "Năm: " . $nam  ?></td>
@@ -328,7 +328,12 @@
 				$sqlts = $sqlts . ")";
 			}
 			if (!$tgsc) {
-				$sqlts = $sqlts . " and tblqlts.TTQLTS not in (select TTQLTS from tbldenghi where (hinhthuc  = 'Thanh lý' or hinhthuc  = 'Điều chuyển' or hinhthuc  = 'Thu hồi' or hinhthuc  = 'Bán' or hinhthuc  = 'Tiêu hủy') and year(ngaythang) <= " . $nam . ")";
+				$sqlts = $sqlts . " and tblqlts.TTQLTS not in (select TTQLTS from tbldenghi where (hinhthuc  = 'Điều chuyển' or hinhthuc  = 'Thu hồi' or hinhthuc  = 'Bán' or hinhthuc  = 'Tiêu hủy') and year(ngaythang) <= " . $nam . ")";
+				//25.03.2023 ts tăng giảm ko bao gồm thanh lý
+				// $sqlts = $sqlts . " and tblqlts.TTQLTS not in (select TTQLTS from tbldenghi where (hinhthuc  = 'Thanh lý' or hinhthuc  = 'Điều chuyển' or hinhthuc  = 'Thu hồi' or hinhthuc  = 'Bán' or hinhthuc  = 'Tiêu hủy') and year(ngaythang) <= " . $nam . ")";
+			}else{
+				$sqlts = $sqlts . " and tblqlts.TTQLTS not in (select TTQLTS from tbldenghi where hinhthuc  = 'Thanh lý' and year(ngaythang) <= " . $nam . ")";
+				
 			}
 
 			$sqlts = $sqlts . " order by tbldanhsachqd32.ttsx,tbldanhsachqd32.mataisanqd32,tblqlts.TTQLTS";
